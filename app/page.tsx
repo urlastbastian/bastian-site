@@ -156,7 +156,7 @@ export default function Home() {
               <h2 className="serif text-5xl font-bold mb-4 tracking-tight">Our <em>Freelancer</em> Network</h2>
               <p className="text-gray-400 text-sm mb-10 max-w-xl leading-relaxed">Every specialist is handpicked. Bastian manages all communication, timelines, and quality — you just approve the work.</p>
               <div className="flex flex-wrap gap-4 mb-16">
-                {["all","web","text","image","design"].map((cat) => (
+                {["all","web","text","image","design","strategy"].map((cat) => (
                   <button key={cat} data-category={cat} className={`filter-btn ${cat === 'all' ? 'active-tab' : ''}`}
                     onClick={(e) => { e.preventDefault(); (window as any).setFilter(cat); }}>
                     {cat === 'all' ? 'All Talent' : cat.charAt(0).toUpperCase() + cat.slice(1)}
