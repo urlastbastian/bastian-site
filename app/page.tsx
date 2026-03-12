@@ -345,19 +345,14 @@ export default function Home() {
         };
 
         async function callClaude(userPrompt, systemPrompt) {
-          const response = await fetch('https://api.anthropic.com/v1/messages', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              model: 'claude-sonnet-4-20250514',
-              max_tokens: 1000,
-              system: systemPrompt,
-              messages: [{ role: 'user', content: userPrompt }]
-            })
-          });
-          const data = await response.json();
-          return data.content && data.content[0] ? data.content[0].text : 'No response generated.';
-        }
+  const response = await fetch('/api/claude', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userPrompt, systemPrompt })
+  });
+  const data = await response.json();
+  return data.text || 'No response generated.';
+}
 
         window.architectTeam = async function() {
           var btn = document.getElementById('architect-btn');
