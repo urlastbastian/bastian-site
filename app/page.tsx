@@ -6,15 +6,32 @@ export default function Home() {
     const el = document.getElementById(id);
     if (el) el.style.display = show ? 'flex' : 'none';
   }
-  function handleContactSubmit(e: React.FormEvent) {
+  async function handleContactSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const contact_name = (document.getElementById('fn') as HTMLInputElement).value;
+    const email = (document.getElementById('fe') as HTMLInputElement).value;
+    const message = (document.getElementById('fm') as HTMLTextAreaElement).value;
+    await fetch('/api/inquiries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contact_name, email, message, brand_name: '' })
+    });
     const form = document.getElementById('contact-form') as HTMLElement;
     const success = document.getElementById('success-message') as HTMLElement;
     if (form) form.style.display = 'none';
     if (success) success.style.display = 'block';
   }
-  function handleJoinSubmit(e: React.FormEvent) {
+  async function handleJoinSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const name = (document.getElementById('join-name') as HTMLInputElement).value;
+    const email = (document.getElementById('join-email') as HTMLInputElement).value;
+    const skill = (document.getElementById('join-skill') as HTMLSelectElement).value;
+    const portfolio = (document.getElementById('join-portfolio') as HTMLInputElement).value;
+    await fetch('/api/applications', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, skill, portfolio })
+    });
     toggleModal('join-modal', false);
     alert("Application sent! We'll review your portfolio soon.");
   }
@@ -312,13 +329,21 @@ export default function Home() {
 
       {/* ALL JS LOGIC */}
       <script dangerouslySetInnerHTML={{ __html: `
-        var allFreelancers = [
-          { name: 'David', role: 'Full-Stack Ninja', category: 'web', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop' },
-          { name: 'Dhruv', role: 'Visual Lead', category: 'image', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop' },
-          { name: 'Anand', role: 'Copy Strategist', category: 'text', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop' },
-          { name: 'Sarah', role: 'UI/UX Wizard', category: 'design', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop' }
-        ];
+        var allFreelancers = [];
         var currentFilter = 'all';
+
+        async function loadFreelancers() {
+          try {
+            const res = await fetch('/api/freelancers');
+            const data = await res.json();
+            if (data.freelancers && data.freelancers.length > 0) {
+              allFreelancers = data.freelancers;
+            }
+          } catch(e) {
+            console.log('Could not load freelancers:', e);
+          }
+          renderFreelancers();
+        }
 
         function renderFreelancers() {
           var filtered = currentFilter === 'all' ? allFreelancers : allFreelancers.filter(function(f){ return f.category === currentFilter; });
@@ -391,7 +416,7 @@ export default function Home() {
           btn.innerHTML = 'Audit Now';
         };
 
-        document.addEventListener('DOMContentLoaded', function() { renderFreelancers(); });
+        document.addEventListener('DOMContentLoaded', function() { loadFreelancers(); });
       `}} />
     </>
   );
