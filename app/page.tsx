@@ -137,7 +137,7 @@ export default function Home() {
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-orange-500 mb-12 text-center">Brands we&apos;ve scaled</p>
             <div id="brands-grid" className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
               <div className="dashed-card p-8 flex items-center justify-center brand-logo rounded-2xl bg-white min-h-[80px]">
-                <img src="https://i.ibb.co/3mKzPzG/One-Kochi-Logo.png" alt="One Kochi" className="h-8 w-auto object-contain" />
+                <img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/images/One%20Kochi%20Logo.png" alt="One Kochi" className="h-8 w-auto object-contain" />
               </div>
               {[...Array(5)].map((_, i) => (
                 <div key={i} className="dashed-card p-8 flex items-center justify-center brand-logo rounded-2xl bg-white min-h-[80px]">
