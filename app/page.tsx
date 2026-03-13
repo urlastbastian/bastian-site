@@ -91,7 +91,7 @@ export default function Home() {
         .audit-box { background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 1px solid #dbeafe; }
         .ticker-track { animation: ticker 40s linear infinite; display: flex; white-space: nowrap; }
         .ticker-item { display: inline-flex; align-items: center; padding: 0 2.5rem; }
-        .ticker-star { color: #f58a07; margin: 0 0; }
+        .ticker-star { color: #f58a07; }
         @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .nav-link { position: relative; }
         .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: #f58a07; transition: width 0.3s; }
@@ -100,7 +100,14 @@ export default function Home() {
         .mobile-menu.open { display: flex; }
         .specialism-btn { cursor: pointer; transition: all 0.3s; }
         .specialism-btn:hover { border-color: #f58a07; color: #f58a07; background: #fff7ed; }
+        .shortlist-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
       `}</style>
+
+      {/* FREELANCER PROFILE MODAL */}
+      <div id="freelancer-modal" style={{display:'none'}} className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-6">
+        <div id="freelancer-modal-content" className="bg-white w-full max-w-md rounded-[3rem] p-10 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        </div>
+      </div>
 
       {/* JOIN MODAL */}
       <div id="join-modal" style={{display:'none'}} className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-6">
@@ -118,6 +125,20 @@ export default function Home() {
             <button type="submit" className="w-full btn-orange py-5 rounded-2xl font-bold uppercase tracking-widest text-xs">Submit Application</button>
           </form>
         </div>
+      </div>
+
+      {/* SHORTLIST BAR */}
+      <div id="shortlist-bar" className="shortlist-bar bg-[#1a1a1a] px-6 py-4 flex items-center justify-between gap-4 shadow-2xl">
+        <div className="flex items-center gap-4">
+          <div id="shortlist-avatars" className="flex items-center" style={{paddingLeft:'8px'}}></div>
+          <div>
+            <p id="shortlist-count" className="text-white font-bold text-sm"></p>
+            <p className="text-gray-400 text-xs">Ready to build your dream team?</p>
+          </div>
+        </div>
+        <button onClick={() => (window as any).requestTeam()} className="btn-orange px-8 py-3 rounded-xl font-bold text-sm flex-shrink-0">
+          Request this Team →
+        </button>
       </div>
 
       {/* NAV */}
@@ -142,7 +163,6 @@ export default function Home() {
             </button>
           </div>
         </div>
-        {/* Mobile menu */}
         <div id="mobile-menu" className="mobile-menu flex-col pt-6 pb-4 space-y-4 lg:hidden">
           {["about","network","offerings","work","audit","join","contact"].map(item => (
             <a key={item} href={`#${item}`} className="uppercase text-[11px] font-bold tracking-widest text-gray-500 hover:text-orange-500"
@@ -158,7 +178,7 @@ export default function Home() {
         <section id="home" className="grid-bg min-h-[75vh] flex items-center px-6 md:px-12 py-20">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start w-full">
             <h1 className="serif text-6xl md:text-8xl font-bold leading-[1.05] tracking-tight italic">
-              Your Brand<br />Deserves a<br /><span className="text-[#f58a07]">Dream Team</span>
+              Your Brand<br />Deserves a <span className="text-[#f58a07]">Dream Team.</span>
             </h1>
             <div className="md:pt-10">
               <p className="text-gray-500 text-xl mb-6 leading-relaxed">
@@ -192,8 +212,8 @@ export default function Home() {
         {/* BRANDS */}
         <section className="py-24 px-6 md:px-12 border-t border-b border-gray-100 bg-gray-50/30">
           <div className="max-w-7xl mx-auto">
-            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-orange-500 mb-12 text-center">Brands we&apos;ve <em className="text-[#f58a07]">scaled</em></p>
-            <div id="brands-grid" className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-orange-500 mb-12 text-center">Brands we&apos;ve scaled</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
               <div className="dashed-card p-3 flex items-center justify-center brand-logo rounded-2xl bg-white min-h-[80px]">
                 <img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/images/One%20Kochi%20Logo.png" alt="One Kochi" className="h-16 w-auto object-contain" />
               </div>
@@ -213,7 +233,7 @@ export default function Home() {
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Who We Are</p>
               <h2 className="serif text-5xl md:text-6xl font-bold tracking-tight mb-6">The <em className="text-[#f58a07]">Glue</em> Between Brands & Talent.</h2>
               <p className="text-gray-500 text-lg leading-relaxed mb-6">Bastian was born from a simple observation: great brands need great creative teams, but great creative teams are hard to find, coordinate, and manage.</p>
-              <p className="text-gray-500 text-lg leading-relaxed mb-10">We solve that. Bastian acts as your outsourced creative director — handpicking the right specialists, briefing them properly, managing timelines, and delivering work you're proud of.</p>
+              <p className="text-gray-500 text-lg leading-relaxed mb-10">We solve that. Bastian acts as your outsourced creative director — handpicking the right specialists, briefing them properly, managing timelines, and delivering work you&apos;re proud of.</p>
               <div className="grid grid-cols-3 gap-8">
                 {[
                   { num: "50+", label: "Specialist Freelancers" },
@@ -230,7 +250,7 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-4">
               {[
                 { title: "Curated Talent", desc: "Every freelancer is handpicked and vetted for quality, reliability and craft." },
-                { title: "Full Management", desc: "We handle strategy, briefs, timelines, revisions and delivery. You just approve." },
+                { title: "Full Management", desc: "We handle briefs, timelines, revisions and delivery. You just approve." },
                 { title: "360° Coverage", desc: "Strategy to execution — one team, every discipline, zero gaps." },
                 { title: "Startup Pricing", desc: "Agency-quality output at a fraction of the retainer cost." },
               ].map(c => (
@@ -249,8 +269,8 @@ export default function Home() {
             <div className="lg:col-span-2">
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">The Network</p>
               <h2 className="serif text-5xl font-bold mb-4 tracking-tight">Our <em className="text-[#f58a07]">Freelancer</em> Network</h2>
-              <p className="text-gray-400 text-sm mb-10 max-w-xl leading-relaxed">Every specialist is handpicked. Bastian manages all communication, timelines, and quality — you just approve the work.</p>
-              <div className="flex flex-wrap gap-3 mb-16">
+              <p className="text-gray-400 text-sm mb-4 max-w-xl leading-relaxed">Every specialist is handpicked. Click any card to view their profile and add them to your team shortlist.</p>
+              <div className="flex flex-wrap gap-3 mb-12">
                 {filters.map((cat) => (
                   <button key={cat.value} data-category={cat.value} className={`filter-btn ${cat.value === 'all' ? 'active-tab' : ''}`}
                     onClick={(e) => { e.preventDefault(); (window as any).setFilter(cat.value); }}>
@@ -459,13 +479,9 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
               <div className="serif text-3xl font-bold tracking-tight mb-4">BASTIAN<span className="text-[#f58a07]">.</span></div>
-              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">The glue between ambitious brands and specialist freelancers. <br /> Agency-quality output. Startup-friendly cost.</p>
+              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">The glue between ambitious brands and specialist freelancers. Agency-quality output. Startup-friendly cost.</p>
               <div className="flex gap-4">
-                {[
-                  { label: "Instagram", href: "#" },
-                  { label: "LinkedIn", href: "#" },
-                  { label: "WhatsApp", href: "#" },
-                ].map(s => (
+                {[{ label: "Instagram", href: "#" },{ label: "LinkedIn", href: "#" },{ label: "WhatsApp", href: "#" }].map(s => (
                   <a key={s.label} href={s.href} className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">{s.label}</a>
                 ))}
               </div>
@@ -481,15 +497,15 @@ export default function Home() {
             <div>
               <p className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-4">Contact</p>
               <div className="space-y-3 text-sm text-gray-400">
-                <p>communication@bastian.co.in</p>
-                <p>Everything, Everywhere, All at Once.</p>
+                <p>hello@bastian.studio</p>
+                <p>Kochi, Kerala, India</p>
                 <a href="#contact" className="block mt-4 btn-orange px-6 py-3 rounded-xl font-bold text-xs text-center uppercase tracking-widest">Start a Project</a>
               </div>
             </div>
           </div>
           <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Consultants. All rights reserved.</div>
-            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Vibe Coded with ✦ AI ✦ in India</div>
+            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Studio Consultants. All rights reserved.</div>
+            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Built with ✦ in Kochi</div>
           </div>
         </div>
       </footer>
