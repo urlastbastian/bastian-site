@@ -158,7 +158,7 @@ export default function Home() {
         <section id="home" className="grid-bg min-h-[75vh] flex items-center px-6 md:px-12 py-20">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start w-full">
             <h1 className="serif text-6xl md:text-8xl font-bold leading-[1.05] tracking-tight italic">
-              Your Brand<br />Deserves A<br /><span className="text-[#f58a07]">Dream Team</span>
+              Your Brand<br />Deserves a<br /><span className="text-[#f58a07]">Dream Team</span>
             </h1>
             <div className="md:pt-10">
               <p className="text-gray-500 text-xl mb-6 leading-relaxed">
@@ -482,14 +482,14 @@ export default function Home() {
               <p className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-4">Contact</p>
               <div className="space-y-3 text-sm text-gray-400">
                 <p>communication@bastian.co.in</p>
-                <p>Everywhere in India</p>
+                <p>Everything, Everywhere, All at Once.</p>
                 <a href="#contact" className="block mt-4 btn-orange px-6 py-3 rounded-xl font-bold text-xs text-center uppercase tracking-widest">Start a Project</a>
               </div>
             </div>
           </div>
           <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Consultants. All rights reserved.</div>
-            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Vibe Coded with ✦AI✦ in India</div>
+            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Vibe Coded with ✦ AI ✦ in India</div>
           </div>
         </div>
       </footer>
