@@ -182,7 +182,7 @@ export default function Home() {
             {[...Array(2)].flatMap((_, i) =>
               ["Social Media","Performance Marketing","Brand Strategy","Content & SEO","Event Management","Website Design","PR & Communications","Creative Direction","Media Buying","Influencer Marketing"].map((item) => (
                 <span key={`${i}-${item}`} className="ticker-item text-xs uppercase tracking-widest text-white/60 flex-shrink-0">
-                  <span className="ticker-star mx-5">✦</span>
+                  {item}<span className="ticker-star ml-5">✦</span>
                 </span>
               ))
             )}
