@@ -30,6 +30,12 @@ window.toggleModalGlobal = function(id, show) {
   if (el) el.style.display = show ? 'flex' : 'none';
 };
 
+window.openJoinWithSkill = function(skill) {
+  var select = document.getElementById('join-skill');
+  if (select && skill) select.value = skill;
+  window.toggleModalGlobal('join-modal', true);
+};
+
 window.setFilter = function(cat) {
   currentFilter = cat;
   document.querySelectorAll('.filter-btn').forEach(function(btn){
