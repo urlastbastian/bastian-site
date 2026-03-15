@@ -174,4 +174,19 @@ window.performAudit = async function() {
   btn.innerHTML = 'Audit Now';
 };
 
-document.addEventListener('DOMContentLoaded', function() { loadFreelancers(); });
+async function loadBrands() {
+  try {
+    var res = await fetch('/api/brands');
+    var data = await res.json();
+    var grid = document.getElementById('brands-grid');
+    if (!grid || !data.brands || data.brands.length === 0) return;
+    grid.innerHTML = data.brands.map(function(b){
+      return '<div class="dashed-card p-3 flex items-center justify-center brand-logo rounded-2xl bg-white min-h-[80px]">'
+        + '<img src="' + b.logo_url + '" alt="' + b.name + '" style="height:64px;width:auto;object-fit:contain;" /></div>';
+    }).join('');
+  } catch(e) {
+    console.log('Could not load brands:', e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() { loadFreelancers(); loadBrands(); });
