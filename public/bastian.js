@@ -181,8 +181,8 @@ async function loadBrands() {
     var grid = document.getElementById('brands-grid');
     if (!grid || !data.brands || data.brands.length === 0) return;
     grid.innerHTML = data.brands.map(function(b){
-      return '<div class="dashed-card p-3 flex items-center justify-center brand-logo rounded-2xl bg-white min-h-[80px]">'
-        + '<img src="' + b.logo_url + '" alt="' + b.name + '" style="height:64px;width:auto;object-fit:contain;" /></div>';
+      return '<div class="dashed-card p-4 flex items-center justify-center brand-logo rounded-2xl bg-white min-h-[80px] min-w-[160px] flex-shrink-0">'
+        + '<img src="' + b.logo_url + '" alt="' + b.name + '" style="height:56px;width:auto;max-width:140px;object-fit:contain;" /></div>';
     }).join('');
   } catch(e) {
     console.log('Could not load brands:', e);

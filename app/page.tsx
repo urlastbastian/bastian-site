@@ -213,12 +213,14 @@ export default function Home() {
         <section className="py-24 px-6 md:px-12 border-t border-b border-gray-100 bg-gray-50/30">
           <div className="max-w-7xl mx-auto">
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-orange-500 mb-12 text-center">Brands we&apos;ve scaled</p>
-            <div id="brands-grid" className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="dashed-card p-3 flex items-center justify-center rounded-2xl bg-white min-h-[80px]">
-                  <div className="w-8 h-8 bg-gray-100 rounded-full animate-pulse" />
-                </div>
-              ))}
+            <div className="relative overflow-hidden">
+              <div id="brands-grid" className="flex gap-8 overflow-x-auto pb-2 scrollbar-hide" style={{scrollbarWidth:'none'}}>
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="dashed-card p-4 flex items-center justify-center rounded-2xl bg-white min-h-[80px] min-w-[160px] flex-shrink-0">
+                    <div className="w-16 h-8 bg-gray-100 rounded animate-pulse" />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
