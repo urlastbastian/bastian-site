@@ -82,7 +82,7 @@ export default function Home() {
         .btn-orange:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(245,138,7,0.3); }
         .dashed-card { border: 1.5px dashed #ddd; transition: all 0.3s ease; }
         .brand-logo { filter: grayscale(100%); opacity: 0.4; transition: all 0.4s ease; }
-        .brand-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.05); }
+        .brand-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.05); border-color: #f58a07 !important; }
         .filter-btn { padding: 6px 16px; border-radius: 99px; font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #999; transition: all 0.3s; border: 1px solid transparent; cursor: pointer; background: none; flex-shrink: 0; }
         .filter-btn:hover { color: var(--bastian-orange); border-color: #eee; }
         .active-tab { background: var(--bastian-orange) !important; color: white !important; border-color: var(--bastian-orange) !important; }
@@ -213,8 +213,8 @@ export default function Home() {
         <section className="py-24 px-6 md:px-12 border-t border-b border-gray-100 bg-gray-50/30">
           <div className="max-w-7xl mx-auto">
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-orange-500 mb-12 text-center">Brands we&apos;ve collaborated with</p>
-            <div className="relative overflow-hidden">
-              <div id="brands-grid" className="flex gap-8 overflow-x-auto pb-2 scrollbar-hide" style={{scrollbarWidth:'none'}}>
+            <div className="relative">
+              <div id="brands-grid" className="flex gap-8 overflow-x-auto pb-2 pt-2" style={{scrollbarWidth:'none'}}>
                 {[...Array(4)].map((_, i) => (
                   <div key={i} className="dashed-card p-4 flex items-center justify-center rounded-2xl bg-white min-h-[80px] min-w-[160px] flex-shrink-0">
                     <div className="w-16 h-8 bg-gray-100 rounded animate-pulse" />
