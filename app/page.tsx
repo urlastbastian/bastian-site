@@ -101,7 +101,7 @@ export default function Home() {
         .specialism-btn { cursor: pointer; transition: all 0.3s; }
         .specialism-btn:hover { border-color: #f58a07; color: #f58a07; background: #fff7ed; }
         .shortlist-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
-        #brands-grid::-webkit-scrollbar { height: 2px; }
+        #brands-grid::-webkit-scrollbar { height: 1px; }
         #brands-grid::-webkit-scrollbar-track { background: #f3f4f6; border-radius: 99px; }
         #brands-grid::-webkit-scrollbar-thumb { background: #f58a07; border-radius: 99px; }
       `}</style>
