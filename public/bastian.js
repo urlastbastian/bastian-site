@@ -189,4 +189,15 @@ async function loadBrands() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() { loadFreelancers(); loadBrands(); });
+document.addEventListener('DOMContentLoaded', function() {
+  loadFreelancers();
+  loadBrands();
+  var grid = document.getElementById('brands-grid');
+  var thumb = document.getElementById('brands-thumb');
+  if (grid && thumb) {
+    grid.addEventListener('scroll', function() {
+      var pct = grid.scrollLeft / (grid.scrollWidth - grid.clientWidth);
+      thumb.style.width = Math.round(pct * 100) + '%';
+    });
+  }
+});

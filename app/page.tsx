@@ -101,9 +101,9 @@ export default function Home() {
         .specialism-btn { cursor: pointer; transition: all 0.3s; }
         .specialism-btn:hover { border-color: #f58a07; color: #f58a07; background: #fff7ed; }
         .shortlist-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
-        #brands-grid::-webkit-scrollbar { height: 0.5px; }
-        #brands-grid::-webkit-scrollbar-track { background: #f3f4f6; border-radius: 99px; }
-        #brands-grid::-webkit-scrollbar-thumb { background: #f58a07; border-radius: 99px; }
+        #brands-grid::-webkit-scrollbar { display: none; }
+        #brands-progress { height: 1px; background: #f3f4f6; border-radius: 99px; margin-top: 12px; }
+        #brands-thumb { height: 1px; background: #f58a07; border-radius: 99px; width: 0%; transition: width 0.1s; }
       `}</style>
 
       {/* FREELANCER PROFILE MODAL */}
@@ -217,14 +217,15 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-orange-500 mb-12 text-center">Brands we&apos;ve collaborated with</p>
             <div className="relative">
-              <div id="brands-grid" className="flex gap-6 overflow-x-auto pb-4 pt-2 cursor-grab active:cursor-grabbing" style={{scrollbarWidth:'thin', scrollbarColor:'#f58a07 #f3f4f6', msOverflowStyle:'none'} as React.CSSProperties}>
+              <div id="brands-grid" className="flex gap-6 overflow-x-auto pb-4 pt-2 cursor-grab active:cursor-grabbing" style={{scrollbarWidth:'none'} as React.CSSProperties}>
                 {[...Array(4)].map((_, i) => (
                   <div key={i} className="dashed-card p-6 flex items-center justify-center rounded-2xl bg-white min-h-[100px] min-w-[180px] flex-shrink-0">
                     <div className="w-24 h-10 bg-gray-100 rounded animate-pulse" />
                   </div>
                 ))}
               </div>
-              <p className="text-[10px] text-gray-300 uppercase tracking-widest font-bold text-center mt-4">Scroll to explore →</p>
+              <div id="brands-progress" className="mx-auto max-w-xs"><div id="brands-thumb"></div></div>
+              <p className="text-[10px] text-gray-300 uppercase tracking-widest font-bold text-center mt-3">Scroll to explore →</p>
             </div>
           </div>
         </section>
