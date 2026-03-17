@@ -214,13 +214,14 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-orange-500 mb-12 text-center">Brands we&apos;ve collaborated with</p>
             <div className="relative">
-              <div id="brands-grid" className="flex gap-8 overflow-x-auto pb-2 pt-2" style={{scrollbarWidth:'none'}}>
+              <div id="brands-grid" className="flex gap-6 overflow-x-auto pb-4 pt-2 cursor-grab active:cursor-grabbing" style={{scrollbarWidth:'thin', scrollbarColor:'#f58a07 #f3f4f6'}}>
                 {[...Array(4)].map((_, i) => (
-                  <div key={i} className="dashed-card p-4 flex items-center justify-center rounded-2xl bg-white min-h-[80px] min-w-[160px] flex-shrink-0">
-                    <div className="w-16 h-8 bg-gray-100 rounded animate-pulse" />
+                  <div key={i} className="dashed-card p-6 flex items-center justify-center rounded-2xl bg-white min-h-[100px] min-w-[180px] flex-shrink-0">
+                    <div className="w-24 h-10 bg-gray-100 rounded animate-pulse" />
                   </div>
                 ))}
               </div>
+              <p className="text-[10px] text-gray-300 uppercase tracking-widest font-bold text-center mt-4">Scroll to explore →</p>
             </div>
           </div>
         </section>
