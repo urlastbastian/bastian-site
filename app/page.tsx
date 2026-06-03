@@ -517,7 +517,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Studio Consultants. All rights reserved.</div>
+            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Consultants. All rights reserved.</div>
             <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Vibe Coded with ✦ AI ✦ in India</div>
           </div>
         </div>
