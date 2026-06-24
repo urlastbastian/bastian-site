@@ -183,7 +183,7 @@ export default function Home() {
       {/* NAV */}
       <nav className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100 py-5 px-6 md:px-12">
         <div className="flex justify-between items-center">
-          <a href="#home" className="serif text-2xl font-bold tracking-tight">BASTIAN<span className="text-[#f58a07]">.</span></a>
+          <a href="#home"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Bastian%20Logo_Fin_Long.png" alt="Bastian" className="h-8 w-auto object-contain" /></a>
           <div className="hidden lg:flex space-x-10 uppercase text-[10px] font-bold tracking-[0.2em] text-gray-400">
             <a href="#about" className="nav-link hover:text-black transition-colors">About</a>
             <a href="#network" className="nav-link hover:text-black transition-colors">Network</a>
@@ -539,8 +539,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
-              <div className="serif text-3xl font-bold tracking-tight mb-4">BASTIAN<span className="text-[#f58a07]">.</span></div>
-              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">Everything, Everywhere, All at Once.</p>
+              <div className="mb-4"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Bastian%20Logo_Fin_Long.png" alt="Bastian" className="h-10 w-auto object-contain" /></div>
+              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">Your Last Bastian.</p>
               <div className="flex gap-4">
                 {[{ label: "Instagram", href: "https://www.instagram.com/bastianconsultants/" },{ label: "LinkedIn", href: "https://www.linkedin.com/company/bastianconsultants/" },{ label: "WhatsApp", href: "https://wa.me/917259803027" }].map(s => (
                   <a key={s.label} href={s.href} className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">{s.label}</a>
@@ -564,7 +564,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Studio Consultants. All rights reserved.</div>
+            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Consultants. All rights reserved.</div>
             <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Vibe Coded with ✦ AI ✦ in India</div>
           </div>
         </div>
