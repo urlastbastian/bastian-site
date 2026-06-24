@@ -183,7 +183,7 @@ export default function Home() {
       {/* NAV */}
       <nav className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100 py-5 px-6 md:px-12">
         <div className="flex justify-between items-center">
-          <a href="#home"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/bastian%20logo%20fin.png" alt="Bastian" className="h-8 w-auto object-contain" /></a>
+          <a href="#home"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/bastian%20logo%20fin.png" alt="Bastian" className="h-16 w-auto object-contain" /></a>
           <div className="hidden lg:flex space-x-10 uppercase text-[10px] font-bold tracking-[0.2em] text-gray-400">
             <a href="#about" className="nav-link hover:text-black transition-colors">About</a>
             <a href="#network" className="nav-link hover:text-black transition-colors">Network</a>
