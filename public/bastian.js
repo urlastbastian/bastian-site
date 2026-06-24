@@ -23,15 +23,15 @@ function renderFreelancers() {
     var inShortlist = shortlist.find(function(s){ return s.id === f.id; });
     var availDot = f.availability ? '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#22c55e;margin-right:4px;"></span>' : '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#d1d5db;margin-right:4px;"></span>';
     return '<div onclick="openFreelancerModal(' + f.id + ')" class="dashed-card p-4 rounded-2xl flex flex-col items-center text-center bg-white shadow-sm hover:border-orange-500 transition-all duration-300 group cursor-pointer relative">'
-      + (inShortlist ? '<div style="position:absolute;top:8px;right:8px;background:#f58a07;color:white;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;">✓</div>' : '')
+      + (inShortlist ? '<div style="position:absolute;top:8px;right:8px;background:#f64523;color:white;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;">✓</div>' : '')
       + '<div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:1px solid #f3f4f6;margin-bottom:12px;">'
       + '<img src="' + f.image + '" style="width:100%;height:100%;object-fit:cover;filter:grayscale(100%);" /></div>'
       + '<h4 style="font-weight:700;font-size:13px;margin-bottom:4px;">' + f.name + '</h4>'
-      + '<p style="font-size:9px;color:#f58a07;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">' + f.role + '</p>'
+      + '<p style="font-size:9px;color:#f64523;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">' + f.role + '</p>'
       + '<p style="font-size:10px;color:#9ca3af;display:flex;align-items:center;justify-content:center;">' + availDot + (f.availability ? 'Available' : 'Busy') + '</p>'
       + '</div>';
   }).join('');
-  var joinCard = '<div onclick="toggleModalGlobal(\'join-modal\', true)" class="dashed-card p-4 rounded-2xl flex flex-col items-center justify-center text-center bg-orange-50 border-orange-200 cursor-pointer hover:bg-orange-500 hover:text-white transition-all duration-300 min-h-[140px]"><div style="width:40px;height:40px;border-radius:50%;border:1px dashed #fdba74;display:flex;align-items:center;justify-content:center;margin-bottom:8px;color:#f58a07;font-size:20px;">+</div><h4 style="font-weight:700;font-size:12px;font-style:italic;">Join the Network</h4></div>';
+  var joinCard = '<div onclick="toggleModalGlobal(\'join-modal\', true)" class="dashed-card p-4 rounded-2xl flex flex-col items-center justify-center text-center bg-orange-50 border-orange-200 cursor-pointer hover:bg-orange-500 hover:text-white transition-all duration-300 min-h-[140px]"><div style="width:40px;height:40px;border-radius:50%;border:1px dashed #fdba74;display:flex;align-items:center;justify-content:center;margin-bottom:8px;color:#f64523;font-size:20px;">+</div><h4 style="font-weight:700;font-size:12px;font-style:italic;">Join the Network</h4></div>';
   grid.innerHTML = cards + joinCard;
 }
 
@@ -39,7 +39,7 @@ window.openFreelancerModal = function(id) {
   var f = allFreelancers.find(function(x){ return x.id === id; });
   if (!f) return;
   var inShortlist = shortlist.find(function(s){ return s.id === f.id; });
-  var skills = f.skills ? f.skills.split(',').map(function(s){ return '<span style="display:inline-block;padding:3px 10px;background:#fff7ed;color:#f58a07;border-radius:99px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin:2px;">' + s.trim() + '</span>'; }).join('') : '';
+  var skills = f.skills ? f.skills.split(',').map(function(s){ return '<span style="display:inline-block;padding:3px 10px;background:#fff7ed;color:#f64523;border-radius:99px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin:2px;">' + s.trim() + '</span>'; }).join('') : '';
   var modal = document.getElementById('freelancer-modal');
   var content = document.getElementById('freelancer-modal-content');
   content.innerHTML = ''
@@ -49,13 +49,13 @@ window.openFreelancerModal = function(id) {
     + '<img src="' + f.image + '" style="width:100%;height:100%;object-fit:cover;" /></div>'
     + '<div>'
     + '<h3 style="font-family:\'Cormorant Garamond\',serif;font-size:28px;font-weight:700;margin-bottom:4px;">' + f.name + '</h3>'
-    + '<p style="color:#f58a07;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">' + f.role + '</p>'
+    + '<p style="color:#f64523;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">' + f.role + '</p>'
     + '<p style="font-size:11px;color:#9ca3af;display:flex;align-items:center;gap:4px;">'
     + (f.availability ? '<span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;"></span>Available for projects' : '<span style="width:8px;height:8px;border-radius:50%;background:#d1d5db;display:inline-block;"></span>Currently busy')
     + '</p></div></div>'
     + (f.bio ? '<p style="color:#6b7280;font-size:14px;line-height:1.7;margin-bottom:20px;">' + f.bio + '</p>' : '')
     + (skills ? '<div style="margin-bottom:24px;">' + skills + '</div>' : '')
-    + '<button onclick="toggleShortlist(' + f.id + ')" id="shortlist-btn-' + f.id + '" style="width:100%;padding:16px;border-radius:16px;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;transition:all 0.3s;border:none;background:' + (inShortlist ? '#1a1a1a' : '#f58a07') + ';color:white;">'
+    + '<button onclick="toggleShortlist(' + f.id + ')" id="shortlist-btn-' + f.id + '" style="width:100%;padding:16px;border-radius:16px;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;transition:all 0.3s;border:none;background:' + (inShortlist ? '#1a1a1a' : '#f64523') + ';color:white;">'
     + (inShortlist ? '✓ Added to Your Team' : '+ Add to Your Team') + '</button>';
   modal.style.display = 'flex';
 };
@@ -74,7 +74,7 @@ window.toggleShortlist = function(id) {
   var btn = document.getElementById('shortlist-btn-' + id);
   if (btn) {
     var inShortlist = shortlist.find(function(s){ return s.id === id; });
-    btn.style.background = inShortlist ? '#1a1a1a' : '#f58a07';
+    btn.style.background = inShortlist ? '#1a1a1a' : '#f64523';
     btn.innerHTML = inShortlist ? '✓ Added to Your Team' : '+ Add to Your Team';
   }
 };

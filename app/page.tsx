@@ -86,13 +86,12 @@ export default function Home() {
   ];
 
   const DECK_URL = "https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Your%20Last%20Bastian..pdf";
-  const TOTAL_PAGES = 24;
 
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
-        :root { --bastian-orange: #f58a07; --bastian-black: #1a1a1a; }
+        :root { --bastian-orange: #f64523; --bastian-black: #1a1a1a; }
         body { font-family: 'DM Sans', sans-serif; background-color: #ffffff; color: var(--bastian-black); }
         h1, h2, h3, h4, .serif { font-family: 'Cormorant Garamond', serif; }
         .grid-bg { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px); }
@@ -109,15 +108,15 @@ export default function Home() {
         .audit-box { background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 1px solid #dbeafe; }
         .ticker-track { animation: ticker 40s linear infinite; display: flex; white-space: nowrap; }
         .ticker-item { display: inline-flex; align-items: center; padding: 0 2.5rem; }
-        .ticker-star { color: #f58a07; }
+        .ticker-star { color: #f64523; }
         @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .nav-link { position: relative; }
-        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: #f58a07; transition: width 0.3s; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: #f64523; transition: width 0.3s; }
         .nav-link:hover::after { width: 100%; }
         .mobile-menu { display: none; }
         .mobile-menu.open { display: flex; }
         .specialism-btn { cursor: pointer; transition: all 0.3s; }
-        .specialism-btn:hover { border-color: #f58a07; color: #f58a07; background: #fff7ed; }
+        .specialism-btn:hover { border-color: #f64523; color: #f64523; background: #fff7ed; }
         .shortlist-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
         .offering-card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; cursor: pointer; background: white; position: relative; overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
         .offering-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--bastian-orange); transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
@@ -130,17 +129,17 @@ export default function Home() {
         .offering-title { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 15px; margin: 8px 0 0 0; }
         #brands-grid::-webkit-scrollbar { height: 1px; }
         #brands-grid::-webkit-scrollbar-track { background: #f3f4f6; border-radius: 99px; }
-        #brands-grid::-webkit-scrollbar-thumb { background: #f58a07; border-radius: 99px; }
+        #brands-grid::-webkit-scrollbar-thumb { background: #f64523; border-radius: 99px; }
         #brands-progress { height: 1px; background: #f3f4f6; border-radius: 99px; margin-top: 12px; }
-        #brands-thumb { height: 1px; background: #f58a07; border-radius: 99px; width: 0%; transition: width 0.1s; }
+        #brands-thumb { height: 1px; background: #f64523; border-radius: 99px; width: 0%; transition: width 0.1s; }
         .deck-canvas-wrap { background: #1a1a1a; border-radius: 16px; overflow: hidden; position: relative; }
         #deck-canvas { display: block; width: 100%; height: auto; }
         .deck-nav-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid #e5e7eb; background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
-        .deck-nav-btn:hover:not(:disabled) { border-color: #f58a07; color: #f58a07; }
+        .deck-nav-btn:hover:not(:disabled) { border-color: #f64523; color: #f64523; }
         .deck-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-        .offerings-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #f58a07 #f3f4f6; }
+        .offerings-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #f64523 #f3f4f6; }
         .offerings-scroll::-webkit-scrollbar { width: 2px; }
-        .offerings-scroll::-webkit-scrollbar-thumb { background: #f58a07; border-radius: 99px; }
+        .offerings-scroll::-webkit-scrollbar-thumb { background: #f64523; border-radius: 99px; }
       `}</style>
 
       {/* FREELANCER PROFILE MODAL */}
@@ -152,7 +151,7 @@ export default function Home() {
       <div id="join-modal" style={{display:'none'}} className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-6">
         <div className="bg-white w-full max-w-lg rounded-[3rem] p-12 shadow-2xl relative max-h-[90vh] overflow-y-auto">
           <button onClick={() => toggleModal('join-modal', false)} className="absolute top-8 right-8 text-gray-400 hover:text-black text-2xl leading-none">✕</button>
-          <h3 className="serif text-4xl font-bold tracking-tight mb-2 italic">Join the <span className="text-[#f58a07]">Network</span></h3>
+          <h3 className="serif text-4xl font-bold tracking-tight mb-2 italic">Join the <span className="text-[#f64523]">Network</span></h3>
           <p className="text-gray-400 text-sm mb-8">Top 10% talent only. Tell us about your craft.</p>
           <form onSubmit={handleJoinSubmit} className="space-y-5">
             <input id="join-name" type="text" placeholder="Full Name" required className="w-full p-4 rounded-2xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500" />
@@ -183,7 +182,7 @@ export default function Home() {
       {/* NAV */}
       <nav className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100 py-5 px-6 md:px-12">
         <div className="flex justify-between items-center">
-          <a href="#home"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Bastian%20Logo_Fin_Long.png" alt="Bastian" className="h-16 w-auto object-contain" /></a>
+          <a href="#home" className="serif text-2xl font-bold tracking-tight">BASTIAN<span className="text-[#f64523]">.</span></a>
           <div className="hidden lg:flex space-x-10 uppercase text-[10px] font-bold tracking-[0.2em] text-gray-400">
             <a href="#about" className="nav-link hover:text-black transition-colors">About</a>
             <a href="#network" className="nav-link hover:text-black transition-colors">Network</a>
@@ -216,7 +215,7 @@ export default function Home() {
         <section id="home" className="grid-bg min-h-[75vh] flex items-center px-6 md:px-12 py-20">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start w-full">
             <h1 className="serif text-6xl md:text-8xl font-bold leading-[1.05] tracking-tight italic">
-              Your Brand<br />Deserves a <span className="text-[#f58a07]">Dream Team.</span>
+              Your Brand<br />Deserves a <span className="text-[#f64523]">Dream Team.</span>
             </h1>
             <div className="md:pt-10">
               <p className="text-gray-500 text-xl mb-6 leading-relaxed">
@@ -270,7 +269,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Who We Are</p>
-              <h2 className="serif text-5xl md:text-6xl font-bold tracking-tight mb-6">The <em className="text-[#f58a07]">Glue</em> Between Brands & Talent.</h2>
+              <h2 className="serif text-5xl md:text-6xl font-bold tracking-tight mb-6">The <em className="text-[#f64523]">Glue</em> Between Brands & Talent.</h2>
               <p className="text-gray-500 text-lg leading-relaxed mb-6">Bastian was born from a simple observation: great brands need great creative teams, but great creative teams are hard to find, coordinate, and manage.</p>
               <p className="text-gray-500 text-lg leading-relaxed mb-10">We solve that. Bastian acts as your outsourced creative director — handpicking the right specialists, briefing them properly, managing timelines, and delivering work you&apos;re proud of.</p>
               <div className="grid grid-cols-3 gap-8">
@@ -280,7 +279,7 @@ export default function Home() {
                   { num: "100%", label: "Managed End-to-End" },
                 ].map(s => (
                   <div key={s.label}>
-                    <div className="serif text-4xl font-bold text-[#f58a07]">{s.num}</div>
+                    <div className="serif text-4xl font-bold text-[#f64523]">{s.num}</div>
                     <div className="text-xs text-gray-400 uppercase tracking-widest font-bold mt-1">{s.label}</div>
                   </div>
                 ))}
@@ -307,7 +306,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-20">
             <div className="lg:col-span-2">
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">The Network</p>
-              <h2 className="serif text-5xl font-bold mb-4 tracking-tight">Our <em className="text-[#f58a07]">Freelancer</em> Network</h2>
+              <h2 className="serif text-5xl font-bold mb-4 tracking-tight">Our <em className="text-[#f64523]">Freelancer</em> Network</h2>
               <p className="text-gray-400 text-sm mb-4 max-w-xl leading-relaxed">Every specialist is handpicked. Click any card to view their profile and add them to your team shortlist.</p>
               <div className="flex flex-wrap gap-3 mb-12">
                 {filters.map((cat) => (
@@ -349,7 +348,7 @@ export default function Home() {
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Portfolio</p>
                 <div className="flex items-end justify-between mb-6">
-                  <h2 className="serif text-5xl font-bold tracking-tight">The <em className="text-[#f58a07]">Deck</em></h2>
+                  <h2 className="serif text-5xl font-bold tracking-tight">The <em className="text-[#f64523]">Deck</em></h2>
                   <a href={DECK_URL} download className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Download
@@ -371,7 +370,7 @@ export default function Home() {
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
                   </button>
                   <div className="flex-1 bg-gray-100 rounded-full h-0.5">
-                    <div id="deck-progress" className="bg-[#f58a07] h-0.5 rounded-full transition-all duration-300" style={{width:'4.16%'}}></div>
+                    <div id="deck-progress" className="bg-[#f64523] h-0.5 rounded-full transition-all duration-300" style={{width:'4.16%'}}></div>
                   </div>
                   <span id="deck-counter" className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex-shrink-0">1 / {TOTAL_PAGES}</span>
                   <button id="deck-next" className="deck-nav-btn">
@@ -383,7 +382,7 @@ export default function Home() {
               {/* RIGHT — Offerings scrollable */}
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">What We Deliver</p>
-                <h2 className="serif text-5xl font-bold tracking-tight mb-6">Our <em className="text-[#f58a07]">Offerings</em></h2>
+                <h2 className="serif text-5xl font-bold tracking-tight mb-6">Our <em className="text-[#f64523]">Offerings</em></h2>
                 <div className="offerings-scroll grid grid-cols-2 gap-2" style={{maxHeight:'420px'}}>
                   {offerings.map((o) => (
                     <div key={o.title} className="offering-card">
@@ -445,7 +444,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">For Freelancers</p>
-              <h2 className="serif text-5xl md:text-6xl font-bold tracking-tight italic mb-6">Do work you <span className="text-[#f58a07]">love.</span></h2>
+              <h2 className="serif text-5xl md:text-6xl font-bold tracking-tight italic mb-6">Do work you <span className="text-[#f64523]">love.</span></h2>
               <p className="text-gray-500 text-lg leading-relaxed mb-8">We bring you vetted briefs, managed clients, and portfolio-worthy projects — so you can focus entirely on your craft.</p>
               <ul className="space-y-3 mb-10">
                 {["Access to quality brand clients","Managed timelines and clear briefs","Payment protection on every project","Flexible — fits around your main job","Community of top creative professionals"].map((item) => (
@@ -475,7 +474,7 @@ export default function Home() {
         <section id="contact" className="py-24 px-6 md:px-12 scroll-mt-20">
           <div className="max-w-3xl mx-auto">
             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Get In Touch</p>
-            <h2 className="serif text-7xl font-bold mb-4 tracking-tight"><em>Let&apos;s</em> <span className="text-[#f58a07]">talk.</span></h2>
+            <h2 className="serif text-7xl font-bold mb-4 tracking-tight"><em>Let&apos;s</em> <span className="text-[#f64523]">talk.</span></h2>
             <p className="text-gray-400 mb-10 leading-relaxed">Tell us about your brand. We&apos;ll put together the perfect team and get back to you within 24 hours.</p>
             <form id="contact-form" className="space-y-10" onSubmit={handleContactSubmit}>
               <div className="grid md:grid-cols-2 gap-10">
@@ -539,8 +538,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
-              <div className="mb-4"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Bastian%20Logo_Fin_Long.png" alt="Bastian" className="h-16 w-auto object-contain" /></div>
-              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">Your Last Bastian.</p>
+              <div className="serif text-3xl font-bold tracking-tight mb-4">BASTIAN<span className="text-[#f64523]">.</span></div>
+              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">Everything, Everywhere, All at Once.</p>
               <div className="flex gap-4">
                 {[{ label: "Instagram", href: "https://www.instagram.com/bastianconsultants/" },{ label: "LinkedIn", href: "https://www.linkedin.com/company/bastianconsultants/" },{ label: "WhatsApp", href: "https://wa.me/917259803027" }].map(s => (
                   <a key={s.label} href={s.href} className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">{s.label}</a>
@@ -564,67 +563,11 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Consultants. All rights reserved.</div>
+            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Studio Consultants. All rights reserved.</div>
             <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Vibe Coded with ✦ AI ✦ in India</div>
           </div>
         </div>
       </footer>
-
-      {/* PDF.js via CDN */}
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-      <script dangerouslySetInnerHTML={{ __html: `
-        var deckPage = 1;
-        var deckTotal = ${TOTAL_PAGES};
-        var deckPdf = null;
-
-        function deckRender(num) {
-          if (!deckPdf) return;
-          deckPdf.getPage(num).then(function(page) {
-            var canvas = document.getElementById('deck-canvas');
-            var wrap = canvas.parentElement;
-            var viewport = page.getViewport({ scale: 1 });
-            var scale = wrap.clientWidth / viewport.width;
-            var scaled = page.getViewport({ scale: scale });
-            canvas.width = scaled.width;
-            canvas.height = scaled.height;
-            var ctx = canvas.getContext('2d');
-            page.render({ canvasContext: ctx, viewport: scaled }).promise.then(function() {
-              var loading = document.getElementById('deck-loading');
-              if (loading) loading.style.display = 'none';
-            });
-            var counter = document.getElementById('deck-counter');
-            if (counter) counter.textContent = num + ' / ' + deckTotal;
-            var progress = document.getElementById('deck-progress');
-            if (progress) progress.style.width = ((num / deckTotal) * 100) + '%';
-            var prev = document.getElementById('deck-prev');
-            var next = document.getElementById('deck-next');
-            if (prev) prev.disabled = num === 1;
-            if (next) next.disabled = num === deckTotal;
-          });
-        }
-
-        window.deckNav = function(dir) {
-          deckPage = Math.min(Math.max(deckPage + dir, 1), deckTotal);
-          deckRender(deckPage);
-        };
-
-        document.addEventListener('DOMContentLoaded', function() {
-          var pdfjsLib = window['pdfjs-dist/build/pdf'];
-          if (!pdfjsLib) { console.log('PDF.js not loaded'); return; }
-          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-          pdfjsLib.getDocument('${DECK_URL}').promise.then(function(pdf) {
-            deckPdf = pdf;
-            deckRender(1);
-          }).catch(function(err) {
-            console.error('PDF load error:', err);
-          });
-
-          var prev = document.getElementById('deck-prev');
-          var next = document.getElementById('deck-next');
-          if (prev) prev.addEventListener('click', function() { window.deckNav(-1); });
-          if (next) next.addEventListener('click', function() { window.deckNav(1); });
-        });
-      `}} />
 
       <script src="/bastian.js" defer></script>
     </>
