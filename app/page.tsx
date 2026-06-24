@@ -54,6 +54,7 @@ export default function Home() {
     { value: "email", label: "Email Marketing" },
     { value: "events", label: "Event Management" },
     { value: "pr", label: "PR & Communications" },
+    { value: "other", label: "Other" },
   ];
 
   const filters = [
@@ -71,18 +72,18 @@ export default function Home() {
   ];
 
   const offerings = [
-    { title: "Brand Building", desc: "From naming and identity to brand guidelines and tone of voice — we build brands that mean something.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> },
-    { title: "Digital Marketing", desc: "Full-funnel digital strategy across search, social, and display — built to convert, not just impress.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> },
-    { title: "PR & Media", desc: "Earned media, press coverage, and reputation management — we get your brand talked about.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
-    { title: "Social Media", desc: "Content strategy, creation, and community management — consistently on-brand, always engaging.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> },
-    { title: "Media Buying", desc: "Strategic placement across print, digital, OOH and broadcast — maximum reach, minimum waste.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> },
+    { title: "Brand Building", desc: "From naming and identity to brand guidelines and tone of voice - we build brands that mean something.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> },
+    { title: "Digital Marketing", desc: "Full-funnel digital strategy across search, social, and display - built to convert, not just impress.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> },
+    { title: "PR & Media", desc: "Earned media, press coverage, and reputation management - we get your brand talked about.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
+    { title: "Social Media", desc: "Content strategy, creation, and community management - consistently on-brand, always engaging.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> },
+    { title: "Media Buying", desc: "Strategic placement across print, digital, OOH and broadcast - maximum reach, minimum waste.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> },
     { title: "Events & Experiential", desc: "Brand activations, product launches, and live experiences that people remember and share.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
-    { title: "Website Design", desc: "Fast, beautiful, conversion-optimised websites — designed to impress and built to perform.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg> },
+    { title: "Website Design", desc: "Fast, beautiful, conversion-optimised websites - designed to impress and built to perform.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg> },
     { title: "Content & SEO", desc: "Blog posts, long-form content, and SEO strategy that builds authority and drives organic growth.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> },
-    { title: "Performance Ads", desc: "Data-driven paid campaigns on Meta, Google, and beyond — optimised for ROAS, not just reach.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
-    { title: "Influencer Marketing", desc: "Curated creator partnerships that feel authentic — from micro-influencers to celebrity collaborations.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> },
-    { title: "Photography & Film", desc: "Campaign shoots, product photography, brand films, and reels — visual storytelling at its finest.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg> },
-    { title: "Creative Direction", desc: "The overarching vision that ties it all together — consistent, compelling, and unmistakably yours.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4-4-4 4-4z"/></svg> },
+    { title: "Performance Ads", desc: "Data-driven paid campaigns on Meta, Google, and beyond - optimised for ROAS, not just reach.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
+    { title: "Influencer Marketing", desc: "Curated creator partnerships that feel authentic - from micro-influencers to celebrity collaborations.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> },
+    { title: "Photography & Film", desc: "Campaign shoots, product photography, brand films, and reels - visual storytelling at its finest.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg> },
+    { title: "Creative Direction", desc: "The overarching vision that ties it all together - consistent, compelling, and unmistakably yours.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4-4-4 4-4z"/></svg> },
   ];
 
 
@@ -131,8 +132,6 @@ export default function Home() {
         #brands-grid::-webkit-scrollbar-thumb { background: #f64523; border-radius: 99px; }
         #brands-progress { height: 1px; background: #f3f4f6; border-radius: 99px; margin-top: 12px; }
         #brands-thumb { height: 1px; background: #f64523; border-radius: 99px; width: 0%; transition: width 0.1s; }
-        .deck-canvas-wrap { background: #1a1a1a; border-radius: 16px; overflow: hidden; position: relative; }
-        #deck-canvas { display: block; width: 100%; height: auto; }
         .deck-nav-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid #e5e7eb; background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
         .deck-nav-btn:hover:not(:disabled) { border-color: #f64523; color: #f64523; }
         .deck-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
@@ -181,7 +180,7 @@ export default function Home() {
       {/* NAV */}
       <nav className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100 py-5 px-6 md:px-12">
         <div className="flex justify-between items-center">
-          <a href="#home" className="serif text-2xl font-bold tracking-tight">BASTIAN<span className="text-[#f64523]">.</span></a>
+          <a href="#home"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Bastian%20Logo_Fin_Long.png" alt="Bastian" className="h-7 w-auto object-contain" /></a>
           <div className="hidden lg:flex space-x-10 uppercase text-[10px] font-bold tracking-[0.2em] text-gray-400">
             <a href="#about" className="nav-link hover:text-black transition-colors">About</a>
             <a href="#network" className="nav-link hover:text-black transition-colors">Network</a>
@@ -218,7 +217,7 @@ export default function Home() {
             </h1>
             <div className="md:pt-10">
               <p className="text-gray-500 text-xl mb-6 leading-relaxed">
-                Bastian is the glue between <strong>ambitious brands</strong> and <strong>specialist freelancers</strong>. We curate your perfect team and manage everything — so you get agency-quality work without the agency price tag.
+                Bastian is the glue between <strong>ambitious brands</strong> and <strong>specialist freelancers</strong>. We curate your perfect team and manage everything - so you get agency-quality work without the agency price tag.
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
                 <a href="#contact" className="text-xs uppercase tracking-widest px-5 py-2.5 bg-orange-50 text-orange-500 rounded-full font-semibold hover:bg-orange-500 hover:text-white transition-colors cursor-pointer">For Brands →</a>
@@ -270,7 +269,7 @@ export default function Home() {
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Who We Are</p>
               <h2 className="serif text-5xl md:text-6xl font-bold tracking-tight mb-6">The <em className="text-[#f64523]">Glue</em> Between Brands & Talent.</h2>
               <p className="text-gray-500 text-lg leading-relaxed mb-6">Bastian was born from a simple observation: great brands need great creative teams, but great creative teams are hard to find, coordinate, and manage.</p>
-              <p className="text-gray-500 text-lg leading-relaxed mb-10">We solve that. Bastian acts as your outsourced creative director — handpicking the right specialists, briefing them properly, managing timelines, and delivering work you&apos;re proud of.</p>
+              <p className="text-gray-500 text-lg leading-relaxed mb-10">We solve that. Bastian acts as your outsourced creative director - handpicking the right specialists, briefing them properly, managing timelines, and delivering work you&apos;re proud of.</p>
               <div className="grid grid-cols-3 gap-8">
                 {[
                   { num: "50+", label: "Specialist Freelancers" },
@@ -288,7 +287,7 @@ export default function Home() {
               {[
                 { title: "Curated Talent", desc: "Every freelancer is handpicked and vetted for quality, reliability and craft." },
                 { title: "Full Management", desc: "We handle briefs, timelines, revisions and delivery. You just approve." },
-                { title: "360° Coverage", desc: "Strategy to execution — one team, every discipline, zero gaps." },
+                { title: "360° Coverage", desc: "Strategy to execution - one team, every discipline, zero gaps." },
                 { title: "Startup Pricing", desc: "Agency-quality output at a fraction of the retainer cost." },
               ].map(c => (
                 <div key={c.title} className="dashed-card p-6 rounded-2xl bg-white hover:border-orange-300 transition-colors">
@@ -338,12 +337,12 @@ export default function Home() {
           </div>
         </section>
 
-        {/* WORK + OFFERINGS — combined section */}
+        {/* WORK + OFFERINGS - combined section */}
         <section id="work" className="py-24 px-6 md:px-12 border-b border-gray-100 scroll-mt-20">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
 
-              {/* LEFT — The Deck */}
+              {/* LEFT - The Deck */}
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Portfolio</p>
                 <div className="flex items-end justify-between mb-6">
@@ -353,20 +352,14 @@ export default function Home() {
                     Download
                   </a>
                 </div>
-                <p className="text-gray-400 text-sm mb-6 leading-relaxed">From brand strategy to activations — a look at who we are and what we&apos;ve built.</p>
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed">From brand strategy to activations - a look at who we are and what we&apos;ve built.</p>
 
-                {/* Canvas-based PDF viewer */}
-                <div className="deck-canvas-wrap mb-4">
-                  <canvas id="deck-canvas"></canvas>
-                  <div id="deck-loading" style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',background:'#1a1a1a'}}>
-                    <div className="loader"></div>
-                  </div>
-                </div>
+
 
 
               </div>
 
-              {/* RIGHT — Offerings scrollable */}
+              {/* RIGHT - Offerings scrollable */}
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">What We Deliver</p>
                 <h2 className="serif text-5xl font-bold tracking-tight mb-6">Our <em className="text-[#f64523]">Offerings</em></h2>
@@ -396,7 +389,7 @@ export default function Home() {
                   <span className="text-blue-500 text-2xl">✦</span>
                   <h3 className="serif font-bold text-4xl md:text-5xl tracking-tight leading-tight">Free <em className="text-blue-600">Brand Audit</em></h3>
                 </div>
-                <p className="text-gray-500 text-lg mb-8 leading-relaxed">Tell us your brand name or social handle and we&apos;ll send you a sharp, honest strategic audit within 24 hours — on us.</p>
+                <p className="text-gray-500 text-lg mb-8 leading-relaxed">Tell us your brand name or social handle and we&apos;ll send you a sharp, honest strategic audit within 24 hours - on us.</p>
                 <div className="flex flex-col gap-3 max-w-lg">
                   <input id="audit-brand" type="text" placeholder="Brand name or @handle" className="bg-white border border-blue-100 p-4 rounded-2xl outline-none focus:border-blue-500 shadow-sm" />
                   <input id="audit-email" type="email" placeholder="Your email address" className="bg-white border border-blue-100 p-4 rounded-2xl outline-none focus:border-blue-500 shadow-sm" />
@@ -426,98 +419,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* JOIN NETWORK */}
-        <section id="join" className="py-24 px-6 md:px-12 border-b border-gray-100 scroll-mt-20 bg-gray-50/40">
-          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">For Freelancers</p>
-              <h2 className="serif text-5xl md:text-6xl font-bold tracking-tight italic mb-6">Do work you <span className="text-[#f64523]">love.</span></h2>
-              <p className="text-gray-500 text-lg leading-relaxed mb-8">We bring you vetted briefs, managed clients, and portfolio-worthy projects — so you can focus entirely on your craft.</p>
-              <ul className="space-y-3 mb-10">
-                {["Access to quality brand clients","Managed timelines and clear briefs","Payment protection on every project","Flexible — fits around your main job","Community of top creative professionals"].map((item) => (
-                  <li key={item} className="flex items-center gap-4 text-sm text-gray-500">
-                    <span className="w-5 h-px bg-orange-500 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <button onClick={() => toggleModal('join-modal', true)} className="btn-orange px-10 py-4 rounded-xl font-bold">
-                Apply to Join the Network →
-              </button>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {skills.map((s) => (
-                <div key={s.value}
-                  className="specialism-btn dashed-card bg-white px-6 py-4 rounded-2xl text-sm text-gray-500"
-                  onClick={() => (window as any).openJoinWithSkill(s.value)}>
-                  {s.label}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        {/* CONTACT */}
-        <section id="contact" className="py-24 px-6 md:px-12 scroll-mt-20">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Get In Touch</p>
-            <h2 className="serif text-7xl font-bold mb-4 tracking-tight"><em>Let&apos;s</em> <span className="text-[#f64523]">talk.</span></h2>
-            <p className="text-gray-400 mb-10 leading-relaxed">Tell us about your brand. We&apos;ll put together the perfect team and get back to you within 24 hours.</p>
-            <form id="contact-form" className="space-y-10" onSubmit={handleContactSubmit}>
-              <div className="grid md:grid-cols-2 gap-10">
-                <div className="border-b-2 border-gray-100 focus-within:border-orange-500 transition-colors py-2">
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Name</label>
-                  <input id="fn" type="text" placeholder="Your name" className="w-full bg-transparent outline-none text-lg" required />
-                </div>
-                <div className="border-b-2 border-gray-100 focus-within:border-orange-500 transition-colors py-2">
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Email</label>
-                  <input id="fe" type="email" placeholder="you@brand.com" className="w-full bg-transparent outline-none text-lg" required />
-                </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-10">
-                <div className="border-b-2 border-gray-100 focus-within:border-orange-500 transition-colors py-2">
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Project Type</label>
-                  <select id="ftype" className="w-full bg-transparent outline-none text-lg text-gray-500">
-                    <option value="">Select a service</option>
-                    <option value="brand">Brand Building</option>
-                    <option value="digital">Digital Marketing</option>
-                    <option value="social">Social Media</option>
-                    <option value="media_buying">Media Buying</option>
-                    <option value="pr">PR & Media</option>
-                    <option value="events">Events & Experiential</option>
-                    <option value="web">Website Design</option>
-                    <option value="content">Content & SEO</option>
-                    <option value="performance">Performance Ads</option>
-                    <option value="influencer">Influencer Marketing</option>
-                    <option value="film">Photography & Film</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div className="border-b-2 border-gray-100 focus-within:border-orange-500 transition-colors py-2">
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Budget Range</label>
-                  <select id="fbudget" className="w-full bg-transparent outline-none text-lg text-gray-500">
-                    <option value="">Select budget</option>
-                    <option value="under_50k">Under ₹50,000</option>
-                    <option value="50k_2l">₹50,000 – ₹2,00,000</option>
-                    <option value="2l_5l">₹2,00,000 – ₹5,00,000</option>
-                    <option value="5l_plus">₹5,00,000+</option>
-                    <option value="discuss">Let&apos;s Discuss</option>
-                  </select>
-                </div>
-              </div>
-              <div className="border-b-2 border-gray-100 focus-within:border-orange-500 transition-colors py-2">
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Message</label>
-                <textarea id="fm" placeholder="Tell us about your project and goals..." rows={4} className="w-full bg-transparent outline-none text-lg resize-none" required />
-              </div>
-              <button type="submit" className="btn-orange w-full md:w-auto px-16 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs">
-                Send Inquiry
-              </button>
-            </form>
-            <div id="success-message" style={{display:'none'}} className="py-24 text-center bg-orange-50 rounded-[4rem] italic font-bold text-orange-600 text-2xl">
-              Inquiry Sent! We&apos;ll be in touch within 24 hours. ✦
-            </div>
-          </div>
-        </section>
+
+
       </main>
 
       {/* FOOTER */}
@@ -525,8 +429,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
-              <div className="serif text-3xl font-bold tracking-tight mb-4">BASTIAN<span className="text-[#f64523]">.</span></div>
-              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">Everything, Everywhere, All at Once.</p>
+              <div className="mb-4"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Bastian%20Logo_Fin_Long.png" alt="Bastian" className="h-8 w-auto object-contain" /></div>
+              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">Your Last Bastian.</p>
               <div className="flex gap-4">
                 {[{ label: "Instagram", href: "https://www.instagram.com/bastianconsultants/" },{ label: "LinkedIn", href: "https://www.linkedin.com/company/bastianconsultants/" },{ label: "WhatsApp", href: "https://wa.me/917259803027" }].map(s => (
                   <a key={s.label} href={s.href} className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">{s.label}</a>
@@ -536,7 +440,7 @@ export default function Home() {
             <div>
               <p className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-4">Navigation</p>
               <div className="space-y-3">
-                {["About","Network","Work","Brand Audit","Join","Contact"].map(item => (
+                {["About","Network","Work","Brand Audit","Join"].map(item => (
                   <a key={item} href={`#${item.toLowerCase().replace(' ','-')}`} className="block text-sm text-gray-400 hover:text-orange-500 transition-colors">{item}</a>
                 ))}
               </div>
