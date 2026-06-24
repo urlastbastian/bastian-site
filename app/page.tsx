@@ -5,6 +5,7 @@ export default function Home() {
     const el = document.getElementById(id);
     if (el) el.style.display = show ? 'flex' : 'none';
   }
+
   async function handleContactSubmit(e: React.FormEvent) {
     e.preventDefault();
     const contact_name = (document.getElementById('fn') as HTMLInputElement).value;
@@ -22,22 +23,18 @@ export default function Home() {
     if (form) form.style.display = 'none';
     if (success) success.style.display = 'block';
   }
+
   async function handleJoinSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const nameEl = document.getElementById('join-name-inline') || document.getElementById('join-name');
-    const name = (nameEl as HTMLInputElement)?.value || '';
-    const emailEl = document.getElementById('join-email-inline') || document.getElementById('join-email');
-    const email = (emailEl as HTMLInputElement)?.value || '';
-    const skillEl = document.getElementById('join-skill-inline') || document.getElementById('join-skill');
-    const skill = (skillEl as HTMLSelectElement)?.value || '';
-    const portfolioEl = document.getElementById('join-portfolio-inline') || document.getElementById('join-portfolio');
-    const portfolio = (portfolioEl as HTMLInputElement)?.value || '';
+    const name = (document.getElementById('join-name-inline') as HTMLInputElement)?.value || '';
+    const email = (document.getElementById('join-email-inline') as HTMLInputElement)?.value || '';
+    const skill = (document.getElementById('join-skill-inline') as HTMLSelectElement)?.value || '';
+    const portfolio = (document.getElementById('join-portfolio-inline') as HTMLInputElement)?.value || '';
     await fetch('/api/applications', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, skill, portfolio })
     });
-    toggleModal('join-modal', false);
     alert("Application sent! We'll review your portfolio soon.");
   }
 
@@ -90,7 +87,6 @@ export default function Home() {
     { title: "Creative Direction", desc: "The overarching vision that ties it all together - consistent, compelling, and unmistakably yours.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4-4-4 4-4z"/></svg> },
   ];
 
-
   return (
     <>
       <style>{`
@@ -100,13 +96,13 @@ export default function Home() {
         h1, h2, h3, h4, .serif { font-family: 'Cormorant Garamond', serif; }
         .grid-bg { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px); }
         .btn-orange { background-color: var(--bastian-orange); color: white; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
-        .btn-orange:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(245,138,7,0.3); }
+        .btn-orange:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(246,69,35,0.3); }
         .dashed-card { border: 1.5px dashed #ddd; transition: all 0.3s ease; }
         .brand-logo { filter: grayscale(100%); opacity: 0.4; transition: all 0.4s ease; }
-        .brand-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.05); }
+        .brand-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.05); border-color: #f64523 !important; }
         .filter-btn { padding: 6px 16px; border-radius: 99px; font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #999; transition: all 0.3s; border: 1px solid transparent; cursor: pointer; background: none; flex-shrink: 0; }
-        .filter-btn:hover { color: var(--bastian-orange); border-color: #eee; }
-        .active-tab { background: var(--bastian-orange) !important; color: white !important; border-color: var(--bastian-orange) !important; }
+        .filter-btn:hover { color: #f64523; border-color: #eee; }
+        .active-tab { background: #f64523 !important; color: white !important; border-color: #f64523 !important; }
         .loader { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s linear infinite; display: inline-block; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .audit-box { background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 1px solid #dbeafe; }
@@ -119,14 +115,12 @@ export default function Home() {
         .nav-link:hover::after { width: 100%; }
         .mobile-menu { display: none; }
         .mobile-menu.open { display: flex; }
-        .specialism-btn { cursor: pointer; transition: all 0.3s; }
-        .specialism-btn:hover { border-color: #f64523; color: #f64523; background: #fff7ed; }
         .shortlist-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
-        .offering-card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; cursor: pointer; background: white; position: relative; overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
-        .offering-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--bastian-orange); transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
+        .offering-card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; cursor: pointer; background: white; position: relative; overflow: hidden; transition: box-shadow 0.3s ease; }
+        .offering-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: #f64523; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
         .offering-card:hover { box-shadow: 0 8px 30px -8px rgba(0,0,0,0.12); }
         .offering-card:hover::before { width: 100%; }
-        .offering-icon { color: var(--bastian-orange); transition: transform 0.3s ease; }
+        .offering-icon { color: #f64523; transition: transform 0.3s ease; }
         .offering-card:hover .offering-icon { transform: scale(1.1); }
         .offering-desc { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease 0.1s; }
         .offering-card:hover .offering-desc { max-height: 80px; opacity: 1; }
@@ -136,9 +130,6 @@ export default function Home() {
         #brands-grid::-webkit-scrollbar-thumb { background: #f64523; border-radius: 99px; }
         #brands-progress { height: 1px; background: #f3f4f6; border-radius: 99px; margin-top: 12px; }
         #brands-thumb { height: 1px; background: #f64523; border-radius: 99px; width: 0%; transition: width 0.1s; }
-        .deck-nav-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid #e5e7eb; background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
-        .deck-nav-btn:hover:not(:disabled) { border-color: #f64523; color: #f64523; }
-        .deck-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
         .offerings-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #f64523 #f3f4f6; }
         .offerings-scroll::-webkit-scrollbar { width: 2px; }
         .offerings-scroll::-webkit-scrollbar-thumb { background: #f64523; border-radius: 99px; }
@@ -148,8 +139,6 @@ export default function Home() {
       <div id="freelancer-modal" style={{display:'none'}} className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-6">
         <div id="freelancer-modal-content" className="bg-white w-full max-w-md rounded-[3rem] p-10 shadow-2xl relative max-h-[90vh] overflow-y-auto"></div>
       </div>
-
-
 
       {/* SHORTLIST BAR */}
       <div id="shortlist-bar" className="shortlist-bar bg-[#1a1a1a] px-6 py-4 flex items-center justify-between gap-4 shadow-2xl">
@@ -161,12 +150,12 @@ export default function Home() {
           </div>
         </div>
         <button onClick={() => (window as any).requestTeam()} className="btn-orange px-8 py-3 rounded-xl font-bold text-sm flex-shrink-0">
-          Request this Team →
+          Request this Team
         </button>
       </div>
 
       {/* NAV */}
-      <nav className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100 py-5 px-6 md:px-12">
+      <nav className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100 py-4 px-6 md:px-12">
         <div className="flex justify-between items-center">
           <a href="#home"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Bastian%20Logo_Fin_Long.png" alt="Bastian" className="h-7 w-auto object-contain" /></a>
           <div className="hidden lg:flex space-x-10 uppercase text-[10px] font-bold tracking-[0.2em] text-gray-400">
@@ -208,12 +197,12 @@ export default function Home() {
                 Bastian is the glue between <strong>ambitious brands</strong> and <strong>specialist freelancers</strong>. We curate your perfect team and manage everything - so you get agency-quality work without the agency price tag.
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
-                <a href="#contact" className="text-xs uppercase tracking-widest px-5 py-2.5 bg-orange-50 text-orange-500 rounded-full font-semibold hover:bg-orange-500 hover:text-white transition-colors cursor-pointer">For Brands →</a>
-                <a href="#join" className="text-xs uppercase tracking-widest px-5 py-2.5 bg-gray-50 text-gray-500 rounded-full font-semibold hover:bg-gray-800 hover:text-white transition-colors cursor-pointer">For Freelancers →</a>
+                <a href="#contact" className="text-xs uppercase tracking-widest px-5 py-2.5 bg-orange-50 text-[#f64523] rounded-full font-semibold hover:bg-[#f64523] hover:text-white transition-colors cursor-pointer">For Brands</a>
+                <a href="#join" className="text-xs uppercase tracking-widest px-5 py-2.5 bg-gray-50 text-gray-500 rounded-full font-semibold hover:bg-gray-800 hover:text-white transition-colors cursor-pointer">For Freelancers</a>
               </div>
               <div className="flex flex-wrap gap-5">
                 <a href="#network" className="btn-orange px-10 py-4 rounded-xl font-bold">Explore the Network</a>
-                <a href="#work" className="border-2 border-orange-500 text-orange-500 px-10 py-4 rounded-xl font-bold hover:bg-orange-50 transition-colors">Our Work</a>
+                <a href="#work" className="border-2 border-[#f64523] text-[#f64523] px-10 py-4 rounded-xl font-bold hover:bg-orange-50 transition-colors">Our Work</a>
               </div>
             </div>
           </div>
@@ -235,7 +224,7 @@ export default function Home() {
         {/* BRANDS */}
         <section className="py-20 px-6 md:px-12 border-t border-b border-gray-100 bg-gray-50/30">
           <div className="max-w-7xl mx-auto">
-            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-orange-500 mb-10 text-center">Brands we&apos;ve collaborated with</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#f64523] mb-10 text-center">Brands we&apos;ve collaborated with</p>
             <div className="relative">
               <div id="brands-grid" className="flex gap-6 overflow-x-auto pb-4 pt-2 cursor-grab active:cursor-grabbing" style={{scrollbarWidth:'none'}}>
                 {[...Array(4)].map((_, i) => (
@@ -245,7 +234,7 @@ export default function Home() {
                 ))}
               </div>
               <div id="brands-progress" className="mx-auto max-w-xs"><div id="brands-thumb"></div></div>
-              <p className="text-[10px] text-gray-300 uppercase tracking-widest font-bold text-center mt-3">Scroll to explore →</p>
+              <p className="text-[10px] text-gray-300 uppercase tracking-widest font-bold text-center mt-3">Scroll to explore</p>
             </div>
           </div>
         </section>
@@ -254,10 +243,10 @@ export default function Home() {
         <section id="about" className="py-24 px-6 md:px-12 border-b border-gray-100 scroll-mt-20">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Who We Are</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#f64523] mb-4">Who We Are</p>
               <h2 className="serif text-5xl md:text-6xl font-bold tracking-tight mb-6">The <em className="text-[#f64523]">Glue</em> Between Brands & Talent.</h2>
               <p className="text-gray-500 text-lg leading-relaxed mb-6">Bastian was born from a simple observation: great brands need great creative teams, but great creative teams are hard to find, coordinate, and manage.</p>
-              <p className="text-gray-500 text-lg leading-relaxed mb-10">We solve that. Bastian acts as your outsourced creative director - handpicking the right specialists, briefing them properly, managing timelines, and delivering work you&apos;re proud of.</p>
+              <p className="text-gray-500 text-lg leading-relaxed mb-10">We solve that. Bastian acts as your outsourced creative director - handpicking the right specialists, briefing them properly, managing timelines, and delivering work you are proud of.</p>
               <div className="grid grid-cols-3 gap-8">
                 {[
                   { num: "50+", label: "Specialist Freelancers" },
@@ -275,7 +264,7 @@ export default function Home() {
               {[
                 { title: "Curated Talent", desc: "Every freelancer is handpicked and vetted for quality, reliability and craft." },
                 { title: "Full Management", desc: "We handle briefs, timelines, revisions and delivery. You just approve." },
-                { title: "360° Coverage", desc: "Strategy to execution - one team, every discipline, zero gaps." },
+                { title: "360 Coverage", desc: "Strategy to execution - one team, every discipline, zero gaps." },
                 { title: "Startup Pricing", desc: "Agency-quality output at a fraction of the retainer cost." },
               ].map(c => (
                 <div key={c.title} className="dashed-card p-6 rounded-2xl bg-white hover:border-orange-300 transition-colors">
@@ -291,7 +280,7 @@ export default function Home() {
         <section id="network" className="py-24 px-6 md:px-12 border-b border-gray-100 scroll-mt-20">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-20">
             <div className="lg:col-span-2">
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">The Network</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#f64523] mb-4">The Network</p>
               <h2 className="serif text-5xl font-bold mb-4 tracking-tight">Our <em className="text-[#f64523]">Freelancer</em> Network</h2>
               <p className="text-gray-400 text-sm mb-4 max-w-xl leading-relaxed">Every specialist is handpicked. Click any card to view their profile and add them to your team shortlist.</p>
               <div className="flex flex-wrap gap-3 mb-12">
@@ -308,32 +297,31 @@ export default function Home() {
             </div>
             <div className="bg-gray-50 p-10 rounded-[3rem] border border-gray-100 h-fit sticky top-28 shadow-sm">
               <div className="flex items-center gap-3 mb-6">
-                <span className="text-orange-500 text-2xl">✨</span>
+                <span className="text-[#f64523] text-2xl">✦</span>
                 <h3 className="serif font-bold text-2xl uppercase tracking-tighter">Team Architect</h3>
               </div>
-              <p className="text-gray-500 text-xs mb-6 leading-relaxed">Describe your project and we&apos;ll personally recommend the perfect team from our network within 24 hours.</p>
+              <p className="text-gray-500 text-xs mb-4 leading-relaxed">Describe your project and we will personally recommend the perfect team within 24 hours.</p>
               <input id="architect-email" type="email" placeholder="Your email address" className="w-full p-4 rounded-2xl border border-gray-200 outline-none text-sm mb-3 focus:border-orange-500 transition-colors" />
               <input id="architect-phone" type="tel" placeholder="Phone number (optional)" className="w-full p-4 rounded-2xl border border-gray-200 outline-none text-sm mb-3 focus:border-orange-500 transition-colors" />
               <textarea id="project-description" placeholder="e.g. Launch a high-end streetwear brand in Mumbai..." className="w-full p-5 rounded-2xl border border-gray-200 outline-none text-sm mb-4 min-h-[100px] shadow-inner focus:border-orange-500 transition-colors resize-none" />
               <button id="architect-btn" className="w-full btn-orange py-4 rounded-2xl font-bold text-xs uppercase tracking-widest"
                 onClick={() => (window as any).submitArchitect()}>
-                Get My Dream Team →
+                Get My Dream Team
               </button>
               <div id="architect-result" style={{display:'none'}} className="mt-4 text-sm text-gray-600 leading-relaxed bg-white p-4 rounded-2xl border border-orange-100 italic text-center">
-                ✦ Thanks! We&apos;ll send your Dream Team recommendation within 24 hours.
+                ✦ Thanks! We will send your Dream Team recommendation within 24 hours.
               </div>
             </div>
           </div>
         </section>
 
-        {/* WORK + OFFERINGS - combined section */}
+        {/* WORK + OFFERINGS */}
         <section id="work" className="py-24 px-6 md:px-12 border-b border-gray-100 scroll-mt-20">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
-
               {/* LEFT - The Deck */}
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Portfolio</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#f64523] mb-4">Portfolio</p>
                 <h2 className="serif text-5xl font-bold tracking-tight mb-3">The <em className="text-[#f64523]">Deck</em></h2>
                 <p className="text-gray-400 text-sm mb-5 leading-relaxed">From brand strategy to activations - a look at who we are and what we have built.</p>
                 <div style={{position:'relative',width:'100%',height:0,paddingTop:'56.25%',borderRadius:'12px',overflow:'hidden',boxShadow:'0 2px 8px 0 rgba(63,69,81,0.16)'}}>
@@ -360,10 +348,9 @@ export default function Home() {
                   </a>
                 </div>
               </div>
-
-              {/* RIGHT - Offerings scrollable */}
+              {/* RIGHT - Offerings */}
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">What We Deliver</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#f64523] mb-4">What We Deliver</p>
                 <h2 className="serif text-5xl font-bold tracking-tight mb-6">Our <em className="text-[#f64523]">Offerings</em></h2>
                 <div className="offerings-scroll grid grid-cols-2 gap-2" style={{maxHeight:'420px'}}>
                   {offerings.map((o) => (
@@ -377,7 +364,6 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-
             </div>
           </div>
         </section>
@@ -391,14 +377,14 @@ export default function Home() {
                   <span className="text-blue-500 text-2xl">✦</span>
                   <h3 className="serif font-bold text-4xl md:text-5xl tracking-tight leading-tight">Free <em className="text-blue-600">Brand Audit</em></h3>
                 </div>
-                <p className="text-gray-500 text-lg mb-8 leading-relaxed">Tell us your brand name or social handle and we&apos;ll send you a sharp, honest strategic audit within 24 hours - on us.</p>
+                <p className="text-gray-500 text-lg mb-8 leading-relaxed">Tell us your brand name, social handle, or website and we will send you a sharp, honest strategic audit within 24 hours - on us.</p>
                 <div className="flex flex-col gap-3 max-w-lg">
                   <input id="audit-brand" type="text" placeholder="Brand name, @handle, or website URL" className="bg-white border border-blue-100 p-4 rounded-2xl outline-none focus:border-blue-500 shadow-sm" />
                   <input id="audit-email" type="email" placeholder="Your email address" className="bg-white border border-blue-100 p-4 rounded-2xl outline-none focus:border-blue-500 shadow-sm" />
                   <input id="audit-phone" type="tel" placeholder="Phone number (optional)" className="bg-white border border-blue-100 p-4 rounded-2xl outline-none focus:border-blue-500 shadow-sm" />
                   <button id="audit-btn" className="bg-[#1a1a1a] text-white px-10 py-4 rounded-2xl font-bold hover:bg-black transition-all text-sm shadow-lg uppercase tracking-widest"
                     onClick={() => (window as any).submitAudit()}>
-                    Request My Free Audit →
+                    Request My Free Audit
                   </button>
                 </div>
                 <div id="audit-result" style={{display:'none'}} className="mt-6 p-5 bg-white/80 rounded-2xl border border-blue-100 text-sm italic text-gray-600 text-center">
@@ -406,7 +392,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="w-full lg:w-1/3 p-8 bg-white/60 backdrop-blur-sm rounded-[3rem] border border-blue-50 shadow-inner">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-4">What you&apos;ll get</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-4">What you will get</p>
                 {[
                   { title: "The Vibe", desc: "What energy does your brand project right now?" },
                   { title: "The Gap", desc: "Your biggest strategic weakness, identified." },
@@ -422,51 +408,7 @@ export default function Home() {
           </div>
         </section>
 
-
-
-
-      </main>
-
-      {/* FOOTER */}
-      <footer className="py-16 px-6 md:px-12 border-t border-gray-100 bg-gray-50/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div className="md:col-span-2">
-              <div className="mb-4"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Bastian%20Logo_Fin_Long.png" alt="Bastian" className="h-8 w-auto object-contain" /></div>
-              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">Your Last Bastian.</p>
-              <div className="flex gap-4">
-                {[{ label: "Instagram", href: "https://www.instagram.com/bastianconsultants/" },{ label: "LinkedIn", href: "https://www.linkedin.com/company/bastianconsultants/" },{ label: "WhatsApp", href: "https://wa.me/917259803027" }].map(s => (
-                  <a key={s.label} href={s.href} className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">{s.label}</a>
-                ))}
-              </div>
-            </div>
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-4">Navigation</p>
-              <div className="space-y-3">
-                {["About","Network","Work","Brand Audit","Join"].map(item => (
-                  <a key={item} href={`#${item.toLowerCase().replace(' ','-')}`} className="block text-sm text-gray-400 hover:text-orange-500 transition-colors">{item}</a>
-                ))}
-              </div>
-            </div>
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-4">Contact</p>
-              <div className="space-y-3 text-sm text-gray-400">
-                <p>communication@bastian.co.in</p>
-                <a href="#contact" className="block mt-4 btn-orange px-6 py-3 rounded-xl font-bold text-xs text-center uppercase tracking-widest">Start a Project</a>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Studio Consultants. All rights reserved.</div>
-            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Vibe Coded with ✦ AI ✦ in India</div>
-          </div>
-        </div>
-      </footer>
-
-      <script src="/bastian.js" defer></script>
-    </>
-  );
-}        {/* JOIN + CONTACT - side by side */}
+        {/* JOIN + CONTACT */}
         <section id="join" className="py-24 px-6 md:px-12 border-b border-gray-100 scroll-mt-20 bg-gray-50/40">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10">
 
@@ -499,7 +441,7 @@ export default function Home() {
             <div id="contact" className="bg-white rounded-[2rem] p-10 border border-gray-100 shadow-sm scroll-mt-20">
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#f64523] mb-3">For Businesses</p>
               <h2 className="serif text-4xl font-bold tracking-tight italic mb-3">Let&apos;s <span className="text-[#f64523]">talk.</span></h2>
-              <p className="text-gray-400 text-sm leading-relaxed mb-6">Tell us about your brand. We&apos;ll put together the perfect team and get back to you within 24 hours.</p>
+              <p className="text-gray-400 text-sm leading-relaxed mb-6">Tell us about your brand. We will put together the perfect team and get back to you within 24 hours.</p>
               <form id="contact-form" className="space-y-3" onSubmit={handleContactSubmit}>
                 <input id="fn" type="text" placeholder="Name" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
                 <input id="fe" type="email" placeholder="Email" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
@@ -531,9 +473,55 @@ export default function Home() {
                 <button type="submit" className="w-full btn-orange py-4 rounded-xl font-bold uppercase tracking-widest text-xs">Send Inquiry</button>
               </form>
               <div id="success-message" style={{display:'none'}} className="mt-4 py-6 text-center bg-orange-50 rounded-2xl italic font-bold text-[#f64523] text-sm">
-                Inquiry sent! We&apos;ll be in touch within 24 hours. ✦
+                Inquiry sent! We will be in touch within 24 hours. ✦
               </div>
             </div>
 
           </div>
         </section>
+      </main>
+
+      {/* FOOTER */}
+      <footer className="py-16 px-6 md:px-12 border-t border-gray-100 bg-gray-50/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
+            <div className="md:col-span-2">
+              <div className="mb-4"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Bastian%20Logo_Fin_Long.png" alt="Bastian" className="h-8 w-auto object-contain" /></div>
+              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">Your Last Bastian.</p>
+              <div className="flex gap-4">
+                {[
+                  { label: "Instagram", href: "https://www.instagram.com/bastianconsultants/" },
+                  { label: "LinkedIn", href: "https://www.linkedin.com/company/bastianconsultants/" },
+                  { label: "WhatsApp", href: "https://wa.me/917259803027" }
+                ].map(s => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-[#f64523] transition-colors">{s.label}</a>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-4">Navigation</p>
+              <div className="space-y-3">
+                {["About","Network","Work","Brand Audit","Join","Contact"].map(item => (
+                  <a key={item} href={`#${item.toLowerCase().replace(' ','-')}`} className="block text-sm text-gray-400 hover:text-[#f64523] transition-colors">{item}</a>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-4">Contact</p>
+              <div className="space-y-3 text-sm text-gray-400">
+                <p>communication@bastian.co.in</p>
+                <a href="#contact" className="block mt-4 btn-orange px-6 py-3 rounded-xl font-bold text-xs text-center uppercase tracking-widest">Start a Project</a>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Consultants. All rights reserved.</div>
+            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Vibe Coded with ✦ AI ✦ in India</div>
+          </div>
+        </div>
+      </footer>
+
+      <script src="/bastian.js" defer></script>
+    </>
+  );
+}
