@@ -70,6 +70,24 @@ export default function Home() {
     { value: "pr", label: "PR" },
   ];
 
+  const offerings = [
+    { title: "Brand Building", desc: "From naming and identity to brand guidelines and tone of voice — we build brands that mean something.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> },
+    { title: "Digital Marketing", desc: "Full-funnel digital strategy across search, social, and display — built to convert, not just impress.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> },
+    { title: "PR & Media", desc: "Earned media, press coverage, and reputation management — we get your brand talked about.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
+    { title: "Social Media", desc: "Content strategy, creation, and community management — consistently on-brand, always engaging.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> },
+    { title: "Media Buying", desc: "Strategic placement across print, digital, OOH and broadcast — maximum reach, minimum waste.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> },
+    { title: "Events & Experiential", desc: "Brand activations, product launches, and live experiences that people remember and share.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
+    { title: "Website Design", desc: "Fast, beautiful, conversion-optimised websites — designed to impress and built to perform.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg> },
+    { title: "Content & SEO", desc: "Blog posts, long-form content, and SEO strategy that builds authority and drives organic growth.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> },
+    { title: "Performance Ads", desc: "Data-driven paid campaigns on Meta, Google, and beyond — optimised for ROAS, not just reach.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
+    { title: "Influencer Marketing", desc: "Curated creator partnerships that feel authentic — from micro-influencers to celebrity collaborations.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> },
+    { title: "Photography & Film", desc: "Campaign shoots, product photography, brand films, and reels — visual storytelling at its finest.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg> },
+    { title: "Creative Direction", desc: "The overarching vision that ties it all together — consistent, compelling, and unmistakably yours.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4-4-4 4-4z"/></svg> },
+  ];
+
+  const DECK_URL = "https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Your%20Last%20Bastian..pdf";
+  const TOTAL_PAGES = 24;
+
   return (
     <>
       <style>{`
@@ -82,7 +100,7 @@ export default function Home() {
         .btn-orange:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(245,138,7,0.3); }
         .dashed-card { border: 1.5px dashed #ddd; transition: all 0.3s ease; }
         .brand-logo { filter: grayscale(100%); opacity: 0.4; transition: all 0.4s ease; }
-        .brand-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.05); border-color: #f58a07 !important; }
+        .brand-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.05); }
         .filter-btn { padding: 6px 16px; border-radius: 99px; font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #999; transition: all 0.3s; border: 1px solid transparent; cursor: pointer; background: none; flex-shrink: 0; }
         .filter-btn:hover { color: var(--bastian-orange); border-color: #eee; }
         .active-tab { background: var(--bastian-orange) !important; color: white !important; border-color: var(--bastian-orange) !important; }
@@ -101,15 +119,29 @@ export default function Home() {
         .specialism-btn { cursor: pointer; transition: all 0.3s; }
         .specialism-btn:hover { border-color: #f58a07; color: #f58a07; background: #fff7ed; }
         .shortlist-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
-        #brands-grid::-webkit-scrollbar { display: none; }
+        .offering-card { border: 1px solid #e5e7eb; border-radius: 16px; padding: 28px; cursor: pointer; background: white; position: relative; overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+        .offering-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--bastian-orange); transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
+        .offering-card:hover { border-color: #e5e7eb; box-shadow: 0 8px 30px -8px rgba(0,0,0,0.12); }
+        .offering-card:hover::before { width: 100%; }
+        .offering-icon { color: var(--bastian-orange); transition: transform 0.3s ease; }
+        .offering-card:hover .offering-icon { transform: scale(1.1); }
+        .offering-desc { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease 0.1s; }
+        .offering-card:hover .offering-desc { max-height: 80px; opacity: 1; }
+        .offering-title { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 18px; margin: 12px 0 0 0; transition: color 0.3s ease; }
+        #brands-grid::-webkit-scrollbar { height: 1px; }
+        #brands-grid::-webkit-scrollbar-track { background: #f3f4f6; border-radius: 99px; }
+        #brands-grid::-webkit-scrollbar-thumb { background: #f58a07; border-radius: 99px; }
         #brands-progress { height: 1px; background: #f3f4f6; border-radius: 99px; margin-top: 12px; }
         #brands-thumb { height: 1px; background: #f58a07; border-radius: 99px; width: 0%; transition: width 0.1s; }
+        .deck-frame { background: #f8f8f8; border-radius: 24px; overflow: hidden; border: 1px solid #e5e7eb; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; }
+        .deck-nav-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid #e5e7eb; background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
+        .deck-nav-btn:hover { border-color: #f58a07; color: #f58a07; }
+        .deck-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
       `}</style>
 
       {/* FREELANCER PROFILE MODAL */}
       <div id="freelancer-modal" style={{display:'none'}} className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-6">
-        <div id="freelancer-modal-content" className="bg-white w-full max-w-md rounded-[3rem] p-10 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-        </div>
+        <div id="freelancer-modal-content" className="bg-white w-full max-w-md rounded-[3rem] p-10 shadow-2xl relative max-h-[90vh] overflow-y-auto"></div>
       </div>
 
       {/* JOIN MODAL */}
@@ -181,7 +213,7 @@ export default function Home() {
         <section id="home" className="grid-bg min-h-[75vh] flex items-center px-6 md:px-12 py-20">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start w-full">
             <h1 className="serif text-6xl md:text-8xl font-bold leading-[1.05] tracking-tight italic">
-              Your Brand<br />Deserves a<br /> <span className="text-[#f58a07]">Dream Team.</span>
+              Your Brand<br />Deserves a <span className="text-[#f58a07]">Dream Team.</span>
             </h1>
             <div className="md:pt-10">
               <p className="text-gray-500 text-xl mb-6 leading-relaxed">
@@ -193,7 +225,7 @@ export default function Home() {
               </div>
               <div className="flex flex-wrap gap-5">
                 <a href="#network" className="btn-orange px-10 py-4 rounded-xl font-bold">Explore the Network</a>
-                <a href="#work" className="border-2 border-orange-500 text-orange-500 px-10 py-4 rounded-xl font-bold hover:bg-orange-50 transition-colors">Past Projects</a>
+                <a href="#work" className="border-2 border-orange-500 text-orange-500 px-10 py-4 rounded-xl font-bold hover:bg-orange-50 transition-colors">Our Work</a>
               </div>
             </div>
           </div>
@@ -213,11 +245,11 @@ export default function Home() {
         </div>
 
         {/* BRANDS */}
-        <section className="py-24 px-6 md:px-12 border-t border-b border-gray-100 bg-gray-50/30">
+        <section className="py-20 px-6 md:px-12 border-t border-b border-gray-100 bg-gray-50/30">
           <div className="max-w-7xl mx-auto">
-            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-orange-500 mb-12 text-center">Brands we&apos;ve collaborated with</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-orange-500 mb-10 text-center">Brands we&apos;ve collaborated with</p>
             <div className="relative">
-              <div id="brands-grid" className="flex gap-6 overflow-x-auto pb-4 pt-2 cursor-grab active:cursor-grabbing" style={{scrollbarWidth:'none'} as React.CSSProperties}>
+              <div id="brands-grid" className="flex gap-6 overflow-x-auto pb-4 pt-2 cursor-grab active:cursor-grabbing" style={{scrollbarWidth:'none'}}>
                 {[...Array(4)].map((_, i) => (
                   <div key={i} className="dashed-card p-6 flex items-center justify-center rounded-2xl bg-white min-h-[100px] min-w-[180px] flex-shrink-0">
                     <div className="w-24 h-10 bg-gray-100 rounded animate-pulse" />
@@ -286,8 +318,6 @@ export default function Home() {
                 {[...Array(4)].map((_, i) => <div key={i} className="h-36 bg-gray-100/50 rounded-2xl animate-pulse" />)}
               </div>
             </div>
-
-            {/* Team Architect */}
             <div className="bg-gray-50 p-10 rounded-[3rem] border border-gray-100 h-fit sticky top-28 shadow-sm">
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-orange-500 text-2xl">✨</span>
@@ -309,32 +339,13 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">What We Deliver</p>
             <h2 className="serif text-6xl font-bold mb-16 tracking-tight">Our <em className="text-[#f58a07]">Offerings</em></h2>
-            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {[
-                { title: "Brand Building", desc: "From naming and identity to brand guidelines and tone of voice — we build brands that mean something.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> },
-                { title: "Digital Marketing", desc: "Full-funnel digital strategy across search, social, and display — built to convert, not just impress.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> },
-                { title: "PR & Media", desc: "Earned media, press coverage, and reputation management — we get your brand talked about.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
-                { title: "Social Media", desc: "Content strategy, creation, and community management — consistently on-brand, always engaging.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> },
-                { title: "Media Buying", desc: "Strategic placement across print, digital, OOH and broadcast — maximum reach, minimum waste.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> },
-                { title: "Events & Experiential", desc: "Brand activations, product launches, and live experiences that people remember and share.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
-                { title: "Website Design", desc: "Fast, beautiful, conversion-optimised websites — designed to impress and built to perform.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg> },
-                { title: "Content & SEO", desc: "Blog posts, long-form content, and SEO strategy that builds authority and drives organic growth.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> },
-                { title: "Performance Ads", desc: "Data-driven paid campaigns on Meta, Google, and beyond — optimised for ROAS, not just reach.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
-                { title: "Influencer Marketing", desc: "Curated creator partnerships that feel authentic — from micro-influencers to celebrity collaborations.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> },
-                { title: "Photography & Film", desc: "Campaign shoots, product photography, brand films, and reels — visual storytelling at its finest.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg> },
-                { title: "Creative Direction", desc: "The overarching vision that ties it all together — consistent, compelling, and unmistakably yours.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4-4-4 4-4z"/></svg> },
-              ].map((o) => (
-                <div key={o.title} className="group relative border-[1.5px] border-gray-200 rounded-2xl p-6 cursor-pointer overflow-hidden transition-all duration-300 hover:border-[#f58a07] hover:shadow-lg bg-white">
-                  {/* Default state — icon + title */}
-                  <div className="flex items-center gap-4 transition-all duration-300 group-hover:mb-4">
-                    <span className="w-8 h-8 flex-shrink-0 text-[#f58a07]">{o.svg}</span>
-                    <span className="serif text-lg font-bold">{o.title}</span>
-                  </div>
-                  {/* Expanded state — description, hidden by default */}
-                  <div className="max-h-0 overflow-hidden group-hover:max-h-40 transition-all duration-500 ease-in-out">
-                    <p className="text-xs text-gray-500 leading-relaxed">{o.desc}</p>
-                    {/* Case study link — hidden until ready */}
-                    {/* <a href="#work" className="inline-block mt-3 text-[10px] font-bold uppercase tracking-widest text-orange-500 hover:underline">View Case Study →</a> */}
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-3">
+              {offerings.map((o) => (
+                <div key={o.title} className="offering-card">
+                  <span className="offering-icon w-7 h-7 block">{o.svg}</span>
+                  <p className="offering-title">{o.title}</p>
+                  <div className="offering-desc">
+                    <p className="text-xs text-gray-400 leading-relaxed mt-3">{o.desc}</p>
                   </div>
                 </div>
               ))}
@@ -342,27 +353,55 @@ export default function Home() {
           </div>
         </section>
 
-        {/* WORK */}
+        {/* THE DECK */}
         <section id="work" className="py-24 px-6 md:px-12 border-b border-gray-100 scroll-mt-20">
           <div className="max-w-7xl mx-auto">
             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Portfolio</p>
-            <h2 className="serif text-6xl font-bold mb-16 tracking-tight">Featured <em className="text-[#f58a07]">Work</em></h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                { title: "Multi-Sensororial Art", description: "Interactive performance branding for a cultural experience brand.", image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=80", tag: "Brand & Events" },
-                { title: "The Shirt Dandy", description: "AI-powered fashion retail launch — brand identity, digital, and in-store experience.", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80", tag: "Fashion & Retail" },
-              ].map((p) => (
-                <div key={p.title} className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 group">
-                  <div className="aspect-video overflow-hidden relative">
-                    <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-700" />
-                    <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full text-orange-500">{p.tag}</span>
-                  </div>
-                  <div className="p-8">
-                    <h4 className="serif font-bold text-xl mb-2">{p.title}</h4>
-                    <p className="text-sm text-gray-400 leading-relaxed">{p.description}</p>
-                  </div>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+              <div>
+                <h2 className="serif text-6xl font-bold tracking-tight">The <em className="text-[#f58a07]">Deck</em></h2>
+                <p className="text-gray-400 mt-3 text-lg">From brand strategy to activations — a look at who we are and what we&apos;ve built.</p>
+              </div>
+              <a href={DECK_URL} download className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors flex-shrink-0">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Download Deck
+              </a>
+            </div>
+
+            {/* PDF Viewer */}
+            <div className="deck-frame mb-6">
+              <iframe
+                id="deck-iframe"
+                src={`${DECK_URL}#page=1&toolbar=0&navpanes=0&scrollbar=0&view=Fit`}
+                className="w-full h-full border-0"
+                title="Bastian Deck"
+              />
+            </div>
+
+            {/* Controls */}
+            <div className="flex items-center justify-between gap-4">
+              <button
+                id="deck-prev"
+                className="deck-nav-btn"
+                onClick={() => (window as any).deckNav(-1)}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+
+              <div className="flex items-center gap-4 flex-1 justify-center">
+                <div className="flex-1 max-w-xs bg-gray-100 rounded-full h-1">
+                  <div id="deck-progress" className="bg-[#f58a07] h-1 rounded-full transition-all duration-300" style={{width:`${(1/TOTAL_PAGES)*100}%`}}></div>
                 </div>
-              ))}
+                <span id="deck-counter" className="text-xs font-bold text-gray-400 uppercase tracking-widest flex-shrink-0">1 / {TOTAL_PAGES}</span>
+              </div>
+
+              <button
+                id="deck-next"
+                className="deck-nav-btn"
+                onClick={() => (window as any).deckNav(1)}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </button>
             </div>
           </div>
         </section>
@@ -492,7 +531,7 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
               <div className="serif text-3xl font-bold tracking-tight mb-4">BASTIAN<span className="text-[#f58a07]">.</span></div>
-              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">The glue between ambitious brands and specialist freelancers. Agency-quality output. Startup-friendly cost.</p>
+              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">Everything, Everywhere, All at Once.</p>
               <div className="flex gap-4">
                 {[{ label: "Instagram", href: "#" },{ label: "LinkedIn", href: "#" },{ label: "WhatsApp", href: "#" }].map(s => (
                   <a key={s.label} href={s.href} className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">{s.label}</a>
@@ -511,19 +550,36 @@ export default function Home() {
               <p className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-4">Contact</p>
               <div className="space-y-3 text-sm text-gray-400">
                 <p>communication@bastian.co.in</p>
-                <p>Everything, Everywhere, All at Once.</p>
                 <a href="#contact" className="block mt-4 btn-orange px-6 py-3 rounded-xl font-bold text-xs text-center uppercase tracking-widest">Start a Project</a>
               </div>
             </div>
           </div>
           <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Consultants. All rights reserved.</div>
+            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Studio Consultants. All rights reserved.</div>
             <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Vibe Coded with ✦ AI ✦ in India</div>
           </div>
         </div>
       </footer>
 
       <script src="/bastian.js" defer></script>
+      <script dangerouslySetInnerHTML={{ __html: `
+        var deckPage = 1;
+        var deckTotal = ${TOTAL_PAGES};
+        var deckUrl = "${DECK_URL}";
+        window.deckNav = function(dir) {
+          deckPage = Math.min(Math.max(deckPage + dir, 1), deckTotal);
+          var iframe = document.getElementById('deck-iframe');
+          if (iframe) iframe.src = deckUrl + '#page=' + deckPage + '&toolbar=0&navpanes=0&scrollbar=0&view=Fit';
+          var counter = document.getElementById('deck-counter');
+          if (counter) counter.textContent = deckPage + ' / ' + deckTotal;
+          var progress = document.getElementById('deck-progress');
+          if (progress) progress.style.width = ((deckPage / deckTotal) * 100) + '%';
+          var prev = document.getElementById('deck-prev');
+          var next = document.getElementById('deck-next');
+          if (prev) prev.disabled = deckPage === 1;
+          if (next) next.disabled = deckPage === deckTotal;
+        };
+      `}} />
     </>
   );
 }
