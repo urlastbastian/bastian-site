@@ -85,7 +85,6 @@ export default function Home() {
     { title: "Creative Direction", desc: "The overarching vision that ties it all together — consistent, compelling, and unmistakably yours.", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4-4-4 4-4z"/></svg> },
   ];
 
-  const DECK_URL = "https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Your%20Last%20Bastian..pdf";
 
   return (
     <>
@@ -349,7 +348,7 @@ export default function Home() {
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Portfolio</p>
                 <div className="flex items-end justify-between mb-6">
                   <h2 className="serif text-5xl font-bold tracking-tight">The <em className="text-[#f64523]">Deck</em></h2>
-                  <a href={DECK_URL} download className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">
+                  <a href="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Your%20Last%20Bastian..pdf" download className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Download
                   </a>
@@ -364,19 +363,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Controls */}
-                <div className="flex items-center gap-3">
-                  <button id="deck-prev" className="deck-nav-btn" disabled>
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
-                  </button>
-                  <div className="flex-1 bg-gray-100 rounded-full h-0.5">
-                    <div id="deck-progress" className="bg-[#f64523] h-0.5 rounded-full transition-all duration-300" style={{width:'4.16%'}}></div>
-                  </div>
-                  <span id="deck-counter" className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex-shrink-0">1 / {TOTAL_PAGES}</span>
-                  <button id="deck-next" className="deck-nav-btn">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
-                  </button>
-                </div>
+
               </div>
 
               {/* RIGHT — Offerings scrollable */}
