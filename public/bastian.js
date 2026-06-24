@@ -25,7 +25,7 @@ function renderFreelancers() {
     return '<div onclick="openFreelancerModal(' + f.id + ')" class="dashed-card p-4 rounded-2xl flex flex-col items-center text-center bg-white shadow-sm hover:border-orange-500 transition-all duration-300 group cursor-pointer relative">'
       + (inShortlist ? '<div style="position:absolute;top:8px;right:8px;background:#f58a07;color:white;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;">✓</div>' : '')
       + '<div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:1px solid #f3f4f6;margin-bottom:12px;">'
-      + '<img src="' + f.image + '" style="width:100%;height:100%;object-fit:cover;filter:grayscale(100%);" onmouseover="this.style.filter=\'grayscale(0%)\'" onmouseout="this.style.filter=\'grayscale(100%)\'" /></div>'
+      + '<img src="' + f.image + '" style="width:100%;height:100%;object-fit:cover;filter:grayscale(100%);" /></div>'
       + '<h4 style="font-weight:700;font-size:13px;margin-bottom:4px;">' + f.name + '</h4>'
       + '<p style="font-size:9px;color:#f58a07;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">' + f.role + '</p>'
       + '<p style="font-size:10px;color:#9ca3af;display:flex;align-items:center;justify-content:center;">' + availDot + (f.availability ? 'Available' : 'Busy') + '</p>'
@@ -68,14 +68,9 @@ window.toggleShortlist = function(id) {
   var f = allFreelancers.find(function(x){ return x.id === id; });
   if (!f) return;
   var idx = shortlist.findIndex(function(s){ return s.id === id; });
-  if (idx > -1) {
-    shortlist.splice(idx, 1);
-  } else {
-    shortlist.push(f);
-  }
+  if (idx > -1) { shortlist.splice(idx, 1); } else { shortlist.push(f); }
   updateShortlistBar();
   renderFreelancers();
-  // Update button inside modal
   var btn = document.getElementById('shortlist-btn-' + id);
   if (btn) {
     var inShortlist = shortlist.find(function(s){ return s.id === id; });
@@ -87,10 +82,7 @@ window.toggleShortlist = function(id) {
 function updateShortlistBar() {
   var bar = document.getElementById('shortlist-bar');
   if (!bar) return;
-  if (shortlist.length === 0) {
-    bar.style.transform = 'translateY(100%)';
-    return;
-  }
+  if (shortlist.length === 0) { bar.style.transform = 'translateY(100%)'; return; }
   bar.style.transform = 'translateY(0)';
   var avatars = shortlist.slice(0,4).map(function(f){
     return '<img src="' + f.image + '" style="width:36px;height:36px;border-radius:50%;border:2px solid white;object-fit:cover;margin-left:-8px;" />';
@@ -127,51 +119,48 @@ window.setFilter = function(cat) {
   renderFreelancers();
 };
 
-async function callClaude(userPrompt, systemPrompt) {
-  var response = await fetch('/api/claude', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ userPrompt: userPrompt, systemPrompt: systemPrompt })
-  });
-  var data = await response.json();
-  return data.text || 'No response generated.';
-}
-
-window.architectTeam = async function() {
+window.submitArchitect = async function() {
   var btn = document.getElementById('architect-btn');
   var res = document.getElementById('architect-result');
+  var email = document.getElementById('architect-email').value;
   var desc = document.getElementById('project-description').value;
-  if (!desc.trim()) return;
+  if (!email.trim() || !desc.trim()) { alert('Please fill in your email and project description.'); return; }
   btn.disabled = true;
-  btn.innerHTML = '<span class="loader"></span>';
-  res.style.display = 'block';
-  res.innerHTML = 'Building your dream team...';
+  btn.innerHTML = 'Sending...';
   try {
-    var text = await callClaude(desc, 'You are Bastian, a creative marketing agency. Suggest 3-4 specialist freelancer roles that would form the perfect team for this project. Give each role a creative title and a one-line description. Explain how together they form the Dream Team. Keep it punchy and inspiring.');
-    res.innerHTML = text;
+    await fetch('/api/inquiries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contact_name: '', email: email, message: 'DREAM TEAM REQUEST: ' + desc, brand_name: '', budget: '', project_type: 'team_architect' })
+    });
+    res.style.display = 'block';
   } catch(e) {
-    res.innerHTML = 'Unable to connect right now. Please try again shortly.';
+    res.style.display = 'block';
   }
   btn.disabled = false;
-  btn.innerHTML = 'Suggest Team';
+  btn.innerHTML = 'Get My Dream Team →';
 };
 
-window.performAudit = async function() {
+window.submitAudit = async function() {
   var btn = document.getElementById('audit-btn');
   var res = document.getElementById('audit-result');
-  var val = document.getElementById('audit-input').value;
-  if (!val.trim()) return;
+  var brand = document.getElementById('audit-brand').value;
+  var email = document.getElementById('audit-email').value;
+  if (!brand.trim() || !email.trim()) { alert('Please fill in your brand name and email.'); return; }
   btn.disabled = true;
-  btn.innerHTML = '<span class="loader"></span>';
-  res.innerHTML = 'Analysing brand...';
+  btn.innerHTML = 'Sending...';
   try {
-    var text = await callClaude(val, 'You are a sharp brand strategist at Bastian. Perform a punchy honest brand audit in 3 short paragraphs: 1) The Vibe - what energy does this brand project? 2) The Gap - biggest strategic weakness? 3) The Move - one bold recommendation. Be direct and inspiring.');
-    res.innerHTML = text;
+    await fetch('/api/inquiries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contact_name: '', email: email, message: 'BRAND AUDIT REQUEST: ' + brand, brand_name: brand, budget: '', project_type: 'brand_audit' })
+    });
+    res.style.display = 'block';
   } catch(e) {
-    res.innerHTML = 'Unable to analyse right now. Please try again shortly.';
+    res.style.display = 'block';
   }
   btn.disabled = false;
-  btn.innerHTML = 'Audit Now';
+  btn.innerHTML = 'Request My Free Audit →';
 };
 
 async function loadBrands() {

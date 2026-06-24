@@ -183,7 +183,7 @@ export default function Home() {
       {/* NAV */}
       <nav className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100 py-5 px-6 md:px-12">
         <div className="flex justify-between items-center">
-          <a href="#home"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/bastian%20logo%20fin.png" alt="Bastian" className="h-32 w-auto object-contain" /></a>
+          <a href="#home" className="serif text-2xl font-bold tracking-tight">BASTIAN<span className="text-[#f58a07]">.</span></a>
           <div className="hidden lg:flex space-x-10 uppercase text-[10px] font-bold tracking-[0.2em] text-gray-400">
             <a href="#about" className="nav-link hover:text-black transition-colors">About</a>
             <a href="#network" className="nav-link hover:text-black transition-colors">Network</a>
@@ -220,7 +220,7 @@ export default function Home() {
             </h1>
             <div className="md:pt-10">
               <p className="text-gray-500 text-xl mb-6 leading-relaxed">
-                Bastian is the glue between <strong>ambitious brands</strong> and <strong>specialist freelancers</strong>. We curate your perfect team and manage everything - so you get agency-quality work without the agency price tag.
+                Bastian is the glue between <strong>ambitious brands</strong> and <strong>specialist freelancers</strong>. We curate your perfect team and manage everything — so you get agency-quality work without the agency price tag.
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
                 <a href="#contact" className="text-xs uppercase tracking-widest px-5 py-2.5 bg-orange-50 text-orange-500 rounded-full font-semibold hover:bg-orange-500 hover:text-white transition-colors cursor-pointer">For Brands →</a>
@@ -326,13 +326,16 @@ export default function Home() {
                 <span className="text-orange-500 text-2xl">✨</span>
                 <h3 className="serif font-bold text-2xl uppercase tracking-tighter">Team Architect</h3>
               </div>
-              <p className="text-gray-500 text-xs mb-6 leading-relaxed">Describe your goal, and our AI will suggest the perfect specialized team structure from our network.</p>
-              <textarea id="project-description" placeholder="e.g. Launch a high-end streetwear brand in Mumbai..." className="w-full p-5 rounded-2xl border border-gray-200 outline-none text-sm mb-6 min-h-[120px] shadow-inner focus:border-orange-500 transition-colors resize-none" />
-              <button id="architect-btn" className="w-full btn-orange py-5 rounded-2xl font-bold text-xs uppercase tracking-widest"
-                onClick={() => (window as any).architectTeam()}>
-                Suggest Team
+              <p className="text-gray-500 text-xs mb-6 leading-relaxed">Describe your project and we&apos;ll personally recommend the perfect team from our network within 24 hours.</p>
+              <input id="architect-email" type="email" placeholder="Your email address" className="w-full p-4 rounded-2xl border border-gray-200 outline-none text-sm mb-3 focus:border-orange-500 transition-colors" />
+              <textarea id="project-description" placeholder="e.g. Launch a high-end streetwear brand in Mumbai..." className="w-full p-5 rounded-2xl border border-gray-200 outline-none text-sm mb-4 min-h-[100px] shadow-inner focus:border-orange-500 transition-colors resize-none" />
+              <button id="architect-btn" className="w-full btn-orange py-4 rounded-2xl font-bold text-xs uppercase tracking-widest"
+                onClick={() => (window as any).submitArchitect()}>
+                Get My Dream Team →
               </button>
-              <div id="architect-result" style={{display:'none'}} className="mt-8 text-sm text-gray-700 leading-relaxed bg-white p-6 rounded-2xl border border-orange-100 italic shadow-sm" />
+              <div id="architect-result" style={{display:'none'}} className="mt-4 text-sm text-gray-600 leading-relaxed bg-white p-4 rounded-2xl border border-orange-100 italic text-center">
+                ✦ Thanks! We&apos;ll send your Dream Team recommendation within 24 hours.
+              </div>
             </div>
           </div>
         </section>
@@ -402,22 +405,36 @@ export default function Home() {
         <section id="audit" className="py-24 px-6 md:px-12 border-b border-gray-100 scroll-mt-20">
           <div className="max-w-7xl mx-auto">
             <div className="audit-box p-12 md:p-16 rounded-[4rem] flex flex-col lg:flex-row justify-between items-center gap-12">
-              <div className="max-w-2xl">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-blue-500 text-2xl">✨</span>
-                  <h3 className="serif font-bold text-4xl md:text-5xl tracking-tight leading-tight">Instant <em className="text-blue-600">Brand Audit</em></h3>
+              <div className="max-w-2xl w-full">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-blue-500 text-2xl">✦</span>
+                  <h3 className="serif font-bold text-4xl md:text-5xl tracking-tight leading-tight">Free <em className="text-blue-600">Brand Audit</em></h3>
                 </div>
-                <p className="text-gray-500 text-lg mb-10 leading-relaxed">Input your brand name or social handle, and our AI will perform a real-time strategic analysis of your presence.</p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <input id="audit-input" type="text" placeholder="@yourbrandname or Brand Name" className="flex-1 bg-white border border-blue-100 p-5 rounded-2xl outline-none focus:border-blue-500 shadow-sm text-lg" />
-                  <button id="audit-btn" className="bg-blue-600 text-white px-10 py-5 rounded-2xl font-bold hover:bg-blue-700 transition-all text-lg shadow-lg shadow-blue-100"
-                    onClick={() => (window as any).performAudit()}>
-                    Audit Now
+                <p className="text-gray-500 text-lg mb-8 leading-relaxed">Tell us your brand name or social handle and we&apos;ll send you a sharp, honest strategic audit within 24 hours — on us.</p>
+                <div className="flex flex-col gap-3 max-w-lg">
+                  <input id="audit-brand" type="text" placeholder="Brand name or @handle" className="bg-white border border-blue-100 p-4 rounded-2xl outline-none focus:border-blue-500 shadow-sm" />
+                  <input id="audit-email" type="email" placeholder="Your email address" className="bg-white border border-blue-100 p-4 rounded-2xl outline-none focus:border-blue-500 shadow-sm" />
+                  <button id="audit-btn" className="bg-[#1a1a1a] text-white px-10 py-4 rounded-2xl font-bold hover:bg-black transition-all text-sm shadow-lg uppercase tracking-widest"
+                    onClick={() => (window as any).submitAudit()}>
+                    Request My Free Audit →
                   </button>
                 </div>
+                <div id="audit-result" style={{display:'none'}} className="mt-6 p-5 bg-white/80 rounded-2xl border border-blue-100 text-sm italic text-gray-600 text-center">
+                  ✦ Thanks! Your brand audit will be in your inbox within 24 hours.
+                </div>
               </div>
-              <div id="audit-result" className="w-full lg:w-1/3 min-h-[200px] p-8 bg-white/60 backdrop-blur-sm rounded-[3rem] border border-blue-50 text-sm italic text-gray-600 shadow-inner flex items-center justify-center text-center">
-                Results will appear here...
+              <div className="w-full lg:w-1/3 p-8 bg-white/60 backdrop-blur-sm rounded-[3rem] border border-blue-50 shadow-inner">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-4">What you&apos;ll get</p>
+                {[
+                  { title: "The Vibe", desc: "What energy does your brand project right now?" },
+                  { title: "The Gap", desc: "Your biggest strategic weakness, identified." },
+                  { title: "The Move", desc: "One bold recommendation to act on immediately." },
+                ].map(item => (
+                  <div key={item.title} className="mb-4">
+                    <p className="serif font-bold text-sm">{item.title}</p>
+                    <p className="text-xs text-gray-400 leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -455,45 +472,62 @@ export default function Home() {
         </section>
 
         {/* CONTACT */}
-        <section id="contact" className="py-20 px-6 md:px-12 scroll-mt-20 bg-[#1a1a1a]">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 mb-12">
-              <div>
-                <h2 className="serif text-6xl md:text-7xl font-bold tracking-tight italic text-white">Let&apos;s <span className="text-[#f58a07]">talk.</span></h2>
-                <p className="text-gray-400 mt-3 text-sm">We&apos;ll put together the perfect team and get back within 24 hours.</p>
+        <section id="contact" className="py-24 px-6 md:px-12 scroll-mt-20">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Get In Touch</p>
+            <h2 className="serif text-7xl font-bold mb-4 tracking-tight"><em>Let&apos;s</em> <span className="text-[#f58a07]">talk.</span></h2>
+            <p className="text-gray-400 mb-10 leading-relaxed">Tell us about your brand. We&apos;ll put together the perfect team and get back to you within 24 hours.</p>
+            <form id="contact-form" className="space-y-10" onSubmit={handleContactSubmit}>
+              <div className="grid md:grid-cols-2 gap-10">
+                <div className="border-b-2 border-gray-100 focus-within:border-orange-500 transition-colors py-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Name</label>
+                  <input id="fn" type="text" placeholder="Your name" className="w-full bg-transparent outline-none text-lg" required />
+                </div>
+                <div className="border-b-2 border-gray-100 focus-within:border-orange-500 transition-colors py-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Email</label>
+                  <input id="fe" type="email" placeholder="you@brand.com" className="w-full bg-transparent outline-none text-lg" required />
+                </div>
               </div>
-              <div className="text-sm text-gray-400 space-y-1 flex-shrink-0">
-                <p className="text-white font-bold">communication@bastian.co.in</p>
-                <p>Bangalore | Cochin | Bombay</p>
+              <div className="grid md:grid-cols-2 gap-10">
+                <div className="border-b-2 border-gray-100 focus-within:border-orange-500 transition-colors py-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Project Type</label>
+                  <select id="ftype" className="w-full bg-transparent outline-none text-lg text-gray-500">
+                    <option value="">Select a service</option>
+                    <option value="brand">Brand Building</option>
+                    <option value="digital">Digital Marketing</option>
+                    <option value="social">Social Media</option>
+                    <option value="media_buying">Media Buying</option>
+                    <option value="pr">PR & Media</option>
+                    <option value="events">Events & Experiential</option>
+                    <option value="web">Website Design</option>
+                    <option value="content">Content & SEO</option>
+                    <option value="performance">Performance Ads</option>
+                    <option value="influencer">Influencer Marketing</option>
+                    <option value="film">Photography & Film</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div className="border-b-2 border-gray-100 focus-within:border-orange-500 transition-colors py-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Budget Range</label>
+                  <select id="fbudget" className="w-full bg-transparent outline-none text-lg text-gray-500">
+                    <option value="">Select budget</option>
+                    <option value="under_50k">Under ₹50,000</option>
+                    <option value="50k_2l">₹50,000 – ₹2,00,000</option>
+                    <option value="2l_5l">₹2,00,000 – ₹5,00,000</option>
+                    <option value="5l_plus">₹5,00,000+</option>
+                    <option value="discuss">Let&apos;s Discuss</option>
+                  </select>
+                </div>
               </div>
-            </div>
-            <form id="contact-form" onSubmit={handleContactSubmit}>
-              <div className="grid md:grid-cols-3 gap-4 mb-4">
-                <input id="fn" type="text" placeholder="Your name" required className="bg-white/10 text-white placeholder-gray-500 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-orange-500 transition-colors text-sm" />
-                <input id="fe" type="email" placeholder="your@email.com" required className="bg-white/10 text-white placeholder-gray-500 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-orange-500 transition-colors text-sm" />
-                <select id="ftype" className="bg-white/10 text-gray-400 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-orange-500 transition-colors text-sm">
-                  <option value="">Project type</option>
-                  <option value="brand">Brand Building</option>
-                  <option value="digital">Digital Marketing</option>
-                  <option value="social">Social Media</option>
-                  <option value="media_buying">Media Buying</option>
-                  <option value="pr">PR & Media</option>
-                  <option value="events">Events & Experiential</option>
-                  <option value="web">Website Design</option>
-                  <option value="content">Content & SEO</option>
-                  <option value="performance">Performance Ads</option>
-                  <option value="influencer">Influencer Marketing</option>
-                  <option value="film">Photography & Film</option>
-                  <option value="other">Other</option>
-                </select>
+              <div className="border-b-2 border-gray-100 focus-within:border-orange-500 transition-colors py-2">
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Message</label>
+                <textarea id="fm" placeholder="Tell us about your project and goals..." rows={4} className="w-full bg-transparent outline-none text-lg resize-none" required />
               </div>
-              <div className="flex gap-4">
-                <textarea id="fm" placeholder="Tell us about your project..." rows={2} required className="flex-1 bg-white/10 text-white placeholder-gray-500 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-orange-500 transition-colors text-sm resize-none" />
-                <button type="submit" className="btn-orange px-8 rounded-xl font-bold text-xs uppercase tracking-widest flex-shrink-0">Send →</button>
-              </div>
-              <input type="hidden" id="fbudget" value="" />
+              <button type="submit" className="btn-orange w-full md:w-auto px-16 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs">
+                Send Inquiry
+              </button>
             </form>
-            <div id="success-message" style={{display:'none'}} className="py-12 text-center italic font-bold text-orange-400 text-xl">
+            <div id="success-message" style={{display:'none'}} className="py-24 text-center bg-orange-50 rounded-[4rem] italic font-bold text-orange-600 text-2xl">
               Inquiry Sent! We&apos;ll be in touch within 24 hours. ✦
             </div>
           </div>
@@ -505,10 +539,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
-              <div className="mb-4"><img src="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/bastian%20logo%20fin.png" alt="Bastian" className="h-20 w-auto object-contain" /></div>
-              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">Your Last Bastian.</p>
+              <div className="serif text-3xl font-bold tracking-tight mb-4">BASTIAN<span className="text-[#f58a07]">.</span></div>
+              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mb-6">Everything, Everywhere, All at Once.</p>
               <div className="flex gap-4">
-                {[{ label: "Instagram", href: "#" },{ label: "LinkedIn", href: "#" },{ label: "WhatsApp", href: "#" }].map(s => (
+                {[{ label: "Instagram", href: "https://www.instagram.com/bastianconsultants/" },{ label: "LinkedIn", href: "https://www.linkedin.com/company/bastianconsultants/" },{ label: "WhatsApp", href: "https://wa.me/917259803027" }].map(s => (
                   <a key={s.label} href={s.href} className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">{s.label}</a>
                 ))}
               </div>
@@ -530,7 +564,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Consultants. All rights reserved.</div>
+            <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">© 2026 Bastian Studio Consultants. All rights reserved.</div>
             <div className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">Vibe Coded with ✦ AI ✦ in India</div>
           </div>
         </div>
