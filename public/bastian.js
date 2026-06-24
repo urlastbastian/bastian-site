@@ -19,19 +19,25 @@ function renderFreelancers() {
   var filtered = currentFilter === 'all' ? allFreelancers : allFreelancers.filter(function(f){ return f.category === currentFilter; });
   var grid = document.getElementById('freelancer-grid');
   if (!grid) return;
+  if (filtered.length === 0 && allFreelancers.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#9ca3af;font-size:13px;padding:40px;">Loading talent...</div>';
+    return;
+  }
   var cards = filtered.map(function(f){
     var inShortlist = shortlist.find(function(s){ return s.id === f.id; });
-    var availDot = f.availability ? '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#22c55e;margin-right:4px;"></span>' : '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#d1d5db;margin-right:4px;"></span>';
-    return '<div onclick="openFreelancerModal(' + f.id + ')" class="dashed-card p-4 rounded-2xl flex flex-col items-center text-center bg-white shadow-sm hover:border-orange-500 transition-all duration-300 group cursor-pointer relative">'
+    var availDot = f.availability
+      ? '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#22c55e;margin-right:4px;"></span>'
+      : '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#d1d5db;margin-right:4px;"></span>';
+    return '<div onclick="openFreelancerModal(' + f.id + ')" style="border:1.5px dashed #ddd;border-radius:16px;padding:16px;display:flex;flex-direction:column;align-items:center;text-align:center;background:white;cursor:pointer;transition:all 0.3s;position:relative;" onmouseover="this.style.borderColor=\'#f64523\'" onmouseout="this.style.borderColor=\'#ddd\'">'
       + (inShortlist ? '<div style="position:absolute;top:8px;right:8px;background:#f64523;color:white;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;">✓</div>' : '')
       + '<div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:1px solid #f3f4f6;margin-bottom:12px;">'
-      + '<img src="' + f.image + '" style="width:100%;height:100%;object-fit:cover;filter:grayscale(100%);transition:filter 0.3s;" onmouseover="this.style.filter='grayscale(0%)'" onmouseout="this.style.filter='grayscale(100%)'" /></div>'
+      + '<img src="' + f.image + '" style="width:100%;height:100%;object-fit:cover;filter:grayscale(100%);transition:filter 0.3s;" onmouseover="this.style.filter=\'grayscale(0%)\'" onmouseout="this.style.filter=\'grayscale(100%)\'" /></div>'
       + '<h4 style="font-weight:700;font-size:13px;margin-bottom:4px;">' + f.name + '</h4>'
       + '<p style="font-size:9px;color:#f64523;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">' + f.role + '</p>'
       + '<p style="font-size:10px;color:#9ca3af;display:flex;align-items:center;justify-content:center;">' + availDot + (f.availability ? 'Available' : 'Busy') + '</p>'
       + '</div>';
   }).join('');
-  var joinCard = '<div onclick="toggleModalGlobal(\'join-modal\', true)" class="dashed-card p-4 rounded-2xl flex flex-col items-center justify-center text-center bg-orange-50 border-orange-200 cursor-pointer hover:bg-orange-500 hover:text-white transition-all duration-300 min-h-[140px]"><div style="width:40px;height:40px;border-radius:50%;border:1px dashed #fdba74;display:flex;align-items:center;justify-content:center;margin-bottom:8px;color:#f64523;font-size:20px;">+</div><h4 style="font-weight:700;font-size:12px;font-style:italic;">Join the Network</h4></div>';
+  var joinCard = '<div onclick="document.getElementById(\'join\').scrollIntoView({behavior:\'smooth\'})" style="border:1.5px dashed #fdba74;border-radius:16px;padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#fff7ed;cursor:pointer;min-height:140px;transition:all 0.3s;" onmouseover="this.style.background=\'#f64523\';this.style.color=\'white\'" onmouseout="this.style.background=\'#fff7ed\';this.style.color=\'\'"><div style="width:40px;height:40px;border-radius:50%;border:1px dashed #fdba74;display:flex;align-items:center;justify-content:center;margin-bottom:8px;color:#f64523;font-size:20px;">+</div><h4 style="font-weight:700;font-size:12px;font-style:italic;">Join the Network</h4></div>';
   grid.innerHTML = cards + joinCard;
 }
 
@@ -39,7 +45,9 @@ window.openFreelancerModal = function(id) {
   var f = allFreelancers.find(function(x){ return x.id === id; });
   if (!f) return;
   var inShortlist = shortlist.find(function(s){ return s.id === f.id; });
-  var skills = f.skills ? f.skills.split(',').map(function(s){ return '<span style="display:inline-block;padding:3px 10px;background:#fff7ed;color:#f64523;border-radius:99px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin:2px;">' + s.trim() + '</span>'; }).join('') : '';
+  var skills = f.skills ? f.skills.split(',').map(function(s){
+    return '<span style="display:inline-block;padding:3px 10px;background:#fff7ed;color:#f64523;border-radius:99px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin:2px;">' + s.trim() + '</span>';
+  }).join('') : '';
   var modal = document.getElementById('freelancer-modal');
   var content = document.getElementById('freelancer-modal-content');
   content.innerHTML = ''
@@ -94,7 +102,7 @@ function updateShortlistBar() {
 window.requestTeam = function() {
   var names = shortlist.map(function(f){ return f.name + ' (' + f.role + ')'; }).join(', ');
   var msg = document.getElementById('fm');
-  if (msg) msg.value = "I'd like to work with: " + names + ".\n\nTell us more about your project...";
+  if (msg) msg.value = "I'd like to work with: " + names + ".\n\nProject details...";
   document.getElementById('shortlist-bar').style.transform = 'translateY(100%)';
   var contact = document.getElementById('contact');
   if (contact) contact.scrollIntoView({ behavior: 'smooth' });
@@ -103,12 +111,6 @@ window.requestTeam = function() {
 window.toggleModalGlobal = function(id, show) {
   var el = document.getElementById(id);
   if (el) el.style.display = show ? 'flex' : 'none';
-};
-
-window.openJoinWithSkill = function(skill) {
-  var select = document.getElementById('join-skill');
-  if (select && skill) select.value = skill;
-  window.toggleModalGlobal('join-modal', true);
 };
 
 window.setFilter = function(cat) {
@@ -122,8 +124,8 @@ window.setFilter = function(cat) {
 window.submitArchitect = async function() {
   var btn = document.getElementById('architect-btn');
   var res = document.getElementById('architect-result');
-  var email = document.getElementById('architect-email').value;
-  var desc = document.getElementById('project-description').value;
+  var email = document.getElementById('architect-email') ? document.getElementById('architect-email').value : '';
+  var desc = document.getElementById('project-description') ? document.getElementById('project-description').value : '';
   if (!email.trim() || !desc.trim()) { alert('Please fill in your email and project description.'); return; }
   btn.disabled = true;
   btn.innerHTML = 'Sending...';
@@ -134,18 +136,16 @@ window.submitArchitect = async function() {
       body: JSON.stringify({ contact_name: '', email: email, message: 'DREAM TEAM REQUEST: ' + desc, brand_name: '', budget: '', project_type: 'team_architect' })
     });
     res.style.display = 'block';
-  } catch(e) {
-    res.style.display = 'block';
-  }
+  } catch(e) { res.style.display = 'block'; }
   btn.disabled = false;
-  btn.innerHTML = 'Get My Dream Team →';
+  btn.innerHTML = 'Get My Dream Team';
 };
 
 window.submitAudit = async function() {
   var btn = document.getElementById('audit-btn');
   var res = document.getElementById('audit-result');
-  var brand = document.getElementById('audit-brand').value;
-  var email = document.getElementById('audit-email').value;
+  var brand = document.getElementById('audit-brand') ? document.getElementById('audit-brand').value : '';
+  var email = document.getElementById('audit-email') ? document.getElementById('audit-email').value : '';
   if (!brand.trim() || !email.trim()) { alert('Please fill in your brand name and email.'); return; }
   btn.disabled = true;
   btn.innerHTML = 'Sending...';
@@ -156,11 +156,9 @@ window.submitAudit = async function() {
       body: JSON.stringify({ contact_name: '', email: email, message: 'BRAND AUDIT REQUEST: ' + brand, brand_name: brand, budget: '', project_type: 'brand_audit' })
     });
     res.style.display = 'block';
-  } catch(e) {
-    res.style.display = 'block';
-  }
+  } catch(e) { res.style.display = 'block'; }
   btn.disabled = false;
-  btn.innerHTML = 'Request My Free Audit →';
+  btn.innerHTML = 'Request My Free Audit';
 };
 
 async function loadBrands() {
@@ -170,7 +168,7 @@ async function loadBrands() {
     var grid = document.getElementById('brands-grid');
     if (!grid || !data.brands || data.brands.length === 0) return;
     grid.innerHTML = data.brands.map(function(b){
-      return '<div class="dashed-card p-4 flex items-center justify-center brand-logo rounded-2xl bg-white min-h-[80px] min-w-[160px] flex-shrink-0">'
+      return '<div style="border:1.5px dashed #ddd;border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:center;background:white;min-height:100px;min-width:180px;flex-shrink:0;filter:grayscale(100%);opacity:0.5;transition:all 0.4s;" onmouseover="this.style.filter=\'grayscale(0%)\';this.style.opacity=\'1\';this.style.borderColor=\'#f64523\'" onmouseout="this.style.filter=\'grayscale(100%)\';this.style.opacity=\'0.5\';this.style.borderColor=\'#ddd\'">'
         + '<img src="' + b.logo_url + '" alt="' + b.name + '" style="height:56px;width:auto;max-width:140px;object-fit:contain;" /></div>';
     }).join('');
   } catch(e) {

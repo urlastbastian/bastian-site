@@ -11,7 +11,7 @@ export default function Home() {
     const contact_name = (document.getElementById('fn') as HTMLInputElement).value;
     const email = (document.getElementById('fe') as HTMLInputElement).value;
     const message = (document.getElementById('fm') as HTMLTextAreaElement).value;
-    const budget = (document.getElementById('fbudget') as HTMLSelectElement).value;
+    const budget = (document.getElementById('fbudget') as HTMLSelectElement)?.value || '';
     const project_type = (document.getElementById('ftype') as HTMLSelectElement).value;
     await fetch('/api/inquiries', {
       method: 'POST',
@@ -138,6 +138,27 @@ export default function Home() {
       {/* FREELANCER PROFILE MODAL */}
       <div id="freelancer-modal" style={{display:'none'}} className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-6">
         <div id="freelancer-modal-content" className="bg-white w-full max-w-md rounded-[3rem] p-10 shadow-2xl relative max-h-[90vh] overflow-y-auto"></div>
+      </div>
+
+      {/* JOIN MODAL */}
+      <div id="join-modal" style={{display:'none'}} className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-6">
+        <div className="bg-white w-full max-w-lg rounded-[3rem] p-12 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+          <button onClick={() => { const m = document.getElementById('join-modal'); if(m) m.style.display='none'; }} className="absolute top-8 right-8 text-gray-400 hover:text-black text-2xl leading-none">✕</button>
+          <h3 className="serif text-4xl font-bold tracking-tight mb-2 italic">Join the <span className="text-[#f64523]">Network</span></h3>
+          <p className="text-gray-400 text-sm mb-8">Top 10% talent only. Tell us about your craft.</p>
+          <form onSubmit={handleJoinSubmit} className="space-y-4">
+            <input id="join-name-inline" type="text" placeholder="Full Name" required className="w-full p-4 rounded-2xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500" />
+            <div className="grid grid-cols-2 gap-3">
+              <input id="join-email-inline" type="email" placeholder="Email Address" required className="w-full p-4 rounded-2xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500" />
+              <input id="join-phone-inline" type="tel" placeholder="Phone (optional)" className="w-full p-4 rounded-2xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500" />
+            </div>
+            <select id="join-skill-inline" className="w-full p-4 rounded-2xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-gray-600">
+              {skills.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+            </select>
+            <input id="join-portfolio-inline" type="url" placeholder="Portfolio / LinkedIn URL" required className="w-full p-4 rounded-2xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500" />
+            <button type="submit" className="w-full btn-orange py-5 rounded-2xl font-bold uppercase tracking-widest text-xs">Submit Application</button>
+          </form>
+        </div>
       </div>
 
       {/* SHORTLIST BAR */}
@@ -417,7 +438,7 @@ export default function Home() {
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#f64523] mb-3">For Freelancers</p>
               <h2 className="serif text-4xl font-bold tracking-tight italic mb-3">Do work you <span className="text-[#f64523]">love.</span></h2>
               <p className="text-gray-400 text-sm leading-relaxed mb-5">We bring you vetted briefs, managed clients, and portfolio-worthy projects - so you can focus entirely on your craft.</p>
-              <ul className="space-y-2 mb-6">
+              <ul className="space-y-2 mb-8">
                 {["Access to quality brand clients","Managed timelines and clear briefs","Payment protection on every project","Flexible - fits around your main job","Community of top creative professionals"].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-sm text-gray-500">
                     <span className="w-4 h-px bg-[#f64523] flex-shrink-0" />
@@ -425,27 +446,22 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <form onSubmit={handleJoinSubmit} className="space-y-3">
-                <input id="join-name-inline" type="text" placeholder="Full Name" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
-                <input id="join-email-inline" type="email" placeholder="Email Address" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
-                <input id="join-phone-inline" type="tel" placeholder="Phone Number (optional)" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
-                <select id="join-skill-inline" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-gray-600 text-sm">
-                  {skills.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
-                </select>
-                <input id="join-portfolio-inline" type="url" placeholder="Portfolio / LinkedIn URL" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
-                <button type="submit" className="w-full btn-orange py-4 rounded-xl font-bold uppercase tracking-widest text-xs">Apply to Join the Network</button>
-              </form>
+              <button onClick={() => { const m = document.getElementById('join-modal'); if(m) m.style.display='flex'; }} className="btn-orange px-10 py-4 rounded-xl font-bold w-full text-center">
+                Apply to Join the Network
+              </button>
             </div>
 
             {/* FOR BUSINESSES */}
             <div id="contact" className="bg-white rounded-[2rem] p-10 border border-gray-100 shadow-sm scroll-mt-20">
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#f64523] mb-3">For Businesses</p>
               <h2 className="serif text-4xl font-bold tracking-tight italic mb-3">Let&apos;s <span className="text-[#f64523]">talk.</span></h2>
-              <p className="text-gray-400 text-sm leading-relaxed mb-6">Tell us about your brand. We will put together the perfect team and get back to you within 24 hours.</p>
+              <p className="text-gray-400 text-sm leading-relaxed mb-6">Tell us about your brand. We will get back to you within 24 hours.</p>
               <form id="contact-form" className="space-y-3" onSubmit={handleContactSubmit}>
                 <input id="fn" type="text" placeholder="Name" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
-                <input id="fe" type="email" placeholder="Email" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
-                <input id="fphone" type="tel" placeholder="Phone Number (optional)" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
+                <div className="grid grid-cols-2 gap-3">
+                  <input id="fe" type="email" placeholder="Email" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
+                  <input id="fphone" type="tel" placeholder="Phone (optional)" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
+                </div>
                 <select id="ftype" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-gray-600 text-sm">
                   <option value="">Project Type</option>
                   <option value="brand">Brand Building</option>
@@ -461,14 +477,7 @@ export default function Home() {
                   <option value="film">Photography & Film</option>
                   <option value="other">Other</option>
                 </select>
-                <select id="fbudget" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-gray-600 text-sm">
-                  <option value="">Budget</option>
-                  <option value="under_50k">Under ₹50,000</option>
-                  <option value="50k_2l">₹50,000 - ₹2,00,000</option>
-                  <option value="2l_5l">₹2,00,000 - ₹5,00,000</option>
-                  <option value="5l_plus">₹5,00,000+</option>
-                  <option value="discuss">Let&apos;s Discuss</option>
-                </select>
+
                 <textarea id="fm" placeholder="Message" rows={3} required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm resize-none" />
                 <button type="submit" className="w-full btn-orange py-4 rounded-xl font-bold uppercase tracking-widest text-xs">Send Inquiry</button>
               </form>
