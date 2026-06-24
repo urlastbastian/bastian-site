@@ -24,10 +24,14 @@ export default function Home() {
   }
   async function handleJoinSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const name = (document.getElementById('join-name') as HTMLInputElement).value;
-    const email = (document.getElementById('join-email') as HTMLInputElement).value;
-    const skill = (document.getElementById('join-skill') as HTMLSelectElement).value;
-    const portfolio = (document.getElementById('join-portfolio') as HTMLInputElement).value;
+    const nameEl = document.getElementById('join-name-inline') || document.getElementById('join-name');
+    const name = (nameEl as HTMLInputElement)?.value || '';
+    const emailEl = document.getElementById('join-email-inline') || document.getElementById('join-email');
+    const email = (emailEl as HTMLInputElement)?.value || '';
+    const skillEl = document.getElementById('join-skill-inline') || document.getElementById('join-skill');
+    const skill = (skillEl as HTMLSelectElement)?.value || '';
+    const portfolioEl = document.getElementById('join-portfolio-inline') || document.getElementById('join-portfolio');
+    const portfolio = (portfolioEl as HTMLInputElement)?.value || '';
     await fetch('/api/applications', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -145,23 +149,7 @@ export default function Home() {
         <div id="freelancer-modal-content" className="bg-white w-full max-w-md rounded-[3rem] p-10 shadow-2xl relative max-h-[90vh] overflow-y-auto"></div>
       </div>
 
-      {/* JOIN MODAL */}
-      <div id="join-modal" style={{display:'none'}} className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-6">
-        <div className="bg-white w-full max-w-lg rounded-[3rem] p-12 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-          <button onClick={() => toggleModal('join-modal', false)} className="absolute top-8 right-8 text-gray-400 hover:text-black text-2xl leading-none">✕</button>
-          <h3 className="serif text-4xl font-bold tracking-tight mb-2 italic">Join the <span className="text-[#f64523]">Network</span></h3>
-          <p className="text-gray-400 text-sm mb-8">Top 10% talent only. Tell us about your craft.</p>
-          <form onSubmit={handleJoinSubmit} className="space-y-5">
-            <input id="join-name" type="text" placeholder="Full Name" required className="w-full p-4 rounded-2xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500" />
-            <input id="join-email" type="email" placeholder="Email Address" required className="w-full p-4 rounded-2xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500" />
-            <select id="join-skill" className="w-full p-4 rounded-2xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-gray-600">
-              {skills.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
-            </select>
-            <input id="join-portfolio" type="url" placeholder="Portfolio / LinkedIn URL" required className="w-full p-4 rounded-2xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500" />
-            <button type="submit" className="w-full btn-orange py-5 rounded-2xl font-bold uppercase tracking-widest text-xs">Submit Application</button>
-          </form>
-        </div>
-      </div>
+
 
       {/* SHORTLIST BAR */}
       <div id="shortlist-bar" className="shortlist-bar bg-[#1a1a1a] px-6 py-4 flex items-center justify-between gap-4 shadow-2xl">
@@ -325,6 +313,7 @@ export default function Home() {
               </div>
               <p className="text-gray-500 text-xs mb-6 leading-relaxed">Describe your project and we&apos;ll personally recommend the perfect team from our network within 24 hours.</p>
               <input id="architect-email" type="email" placeholder="Your email address" className="w-full p-4 rounded-2xl border border-gray-200 outline-none text-sm mb-3 focus:border-orange-500 transition-colors" />
+              <input id="architect-phone" type="tel" placeholder="Phone number (optional)" className="w-full p-4 rounded-2xl border border-gray-200 outline-none text-sm mb-3 focus:border-orange-500 transition-colors" />
               <textarea id="project-description" placeholder="e.g. Launch a high-end streetwear brand in Mumbai..." className="w-full p-5 rounded-2xl border border-gray-200 outline-none text-sm mb-4 min-h-[100px] shadow-inner focus:border-orange-500 transition-colors resize-none" />
               <button id="architect-btn" className="w-full btn-orange py-4 rounded-2xl font-bold text-xs uppercase tracking-widest"
                 onClick={() => (window as any).submitArchitect()}>
@@ -345,18 +334,31 @@ export default function Home() {
               {/* LEFT - The Deck */}
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Portfolio</p>
-                <div className="flex items-end justify-between mb-6">
-                  <h2 className="serif text-5xl font-bold tracking-tight">The <em className="text-[#f64523]">Deck</em></h2>
-                  <a href="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Your%20Last%20Bastian..pdf" download className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">
+                <h2 className="serif text-5xl font-bold tracking-tight mb-3">The <em className="text-[#f64523]">Deck</em></h2>
+                <p className="text-gray-400 text-sm mb-5 leading-relaxed">From brand strategy to activations - a look at who we are and what we have built.</p>
+                <div style={{position:'relative',width:'100%',height:0,paddingTop:'56.25%',borderRadius:'12px',overflow:'hidden',boxShadow:'0 2px 8px 0 rgba(63,69,81,0.16)'}}>
+                  <iframe
+                    loading="lazy"
+                    style={{position:'absolute',width:'100%',height:'100%',top:0,left:0,border:'none',padding:0,margin:0}}
+                    src="https://www.canva.com/design/DAHNgt89NrA/nbZtDqA5ecd7_fLl2uz9_Q/view?embed"
+                    allowFullScreen
+                    allow="fullscreen"
+                    title="Bastian Deck"
+                  />
+                </div>
+                <p className="text-[10px] text-gray-300 uppercase tracking-widest mt-3 mb-3">Taking too long? Open it directly below.</p>
+                <div className="flex gap-3">
+                  <a href="https://www.canva.com/design/DAHNgt89NrA/nbZtDqA5ecd7_fLl2uz9_Q/view" target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 border border-gray-200 rounded-xl text-gray-500 hover:border-[#f64523] hover:text-[#f64523] transition-colors">
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    View in Browser
+                  </a>
+                  <a href="https://tuvojbqvhbitedvgtzjn.supabase.co/storage/v1/object/public/Portfolio/Your%20Last%20Bastian..pdf" download
+                    className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 border border-gray-200 rounded-xl text-gray-500 hover:border-[#f64523] hover:text-[#f64523] transition-colors">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                    Download
+                    Download PDF
                   </a>
                 </div>
-                <p className="text-gray-400 text-sm mb-6 leading-relaxed">From brand strategy to activations - a look at who we are and what we&apos;ve built.</p>
-
-
-
-
               </div>
 
               {/* RIGHT - Offerings scrollable */}
@@ -391,8 +393,9 @@ export default function Home() {
                 </div>
                 <p className="text-gray-500 text-lg mb-8 leading-relaxed">Tell us your brand name or social handle and we&apos;ll send you a sharp, honest strategic audit within 24 hours - on us.</p>
                 <div className="flex flex-col gap-3 max-w-lg">
-                  <input id="audit-brand" type="text" placeholder="Brand name or @handle" className="bg-white border border-blue-100 p-4 rounded-2xl outline-none focus:border-blue-500 shadow-sm" />
+                  <input id="audit-brand" type="text" placeholder="Brand name, @handle, or website URL" className="bg-white border border-blue-100 p-4 rounded-2xl outline-none focus:border-blue-500 shadow-sm" />
                   <input id="audit-email" type="email" placeholder="Your email address" className="bg-white border border-blue-100 p-4 rounded-2xl outline-none focus:border-blue-500 shadow-sm" />
+                  <input id="audit-phone" type="tel" placeholder="Phone number (optional)" className="bg-white border border-blue-100 p-4 rounded-2xl outline-none focus:border-blue-500 shadow-sm" />
                   <button id="audit-btn" className="bg-[#1a1a1a] text-white px-10 py-4 rounded-2xl font-bold hover:bg-black transition-all text-sm shadow-lg uppercase tracking-widest"
                     onClick={() => (window as any).submitAudit()}>
                     Request My Free Audit →
@@ -463,4 +466,74 @@ export default function Home() {
       <script src="/bastian.js" defer></script>
     </>
   );
-}
+}        {/* JOIN + CONTACT - side by side */}
+        <section id="join" className="py-24 px-6 md:px-12 border-b border-gray-100 scroll-mt-20 bg-gray-50/40">
+          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10">
+
+            {/* FOR FREELANCERS */}
+            <div className="bg-white rounded-[2rem] p-10 border border-gray-100 shadow-sm">
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#f64523] mb-3">For Freelancers</p>
+              <h2 className="serif text-4xl font-bold tracking-tight italic mb-3">Do work you <span className="text-[#f64523]">love.</span></h2>
+              <p className="text-gray-400 text-sm leading-relaxed mb-5">We bring you vetted briefs, managed clients, and portfolio-worthy projects - so you can focus entirely on your craft.</p>
+              <ul className="space-y-2 mb-6">
+                {["Access to quality brand clients","Managed timelines and clear briefs","Payment protection on every project","Flexible - fits around your main job","Community of top creative professionals"].map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-sm text-gray-500">
+                    <span className="w-4 h-px bg-[#f64523] flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <form onSubmit={handleJoinSubmit} className="space-y-3">
+                <input id="join-name-inline" type="text" placeholder="Full Name" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
+                <input id="join-email-inline" type="email" placeholder="Email Address" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
+                <input id="join-phone-inline" type="tel" placeholder="Phone Number (optional)" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
+                <select id="join-skill-inline" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-gray-600 text-sm">
+                  {skills.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+                </select>
+                <input id="join-portfolio-inline" type="url" placeholder="Portfolio / LinkedIn URL" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
+                <button type="submit" className="w-full btn-orange py-4 rounded-xl font-bold uppercase tracking-widest text-xs">Apply to Join the Network</button>
+              </form>
+            </div>
+
+            {/* FOR BUSINESSES */}
+            <div id="contact" className="bg-white rounded-[2rem] p-10 border border-gray-100 shadow-sm scroll-mt-20">
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#f64523] mb-3">For Businesses</p>
+              <h2 className="serif text-4xl font-bold tracking-tight italic mb-3">Let&apos;s <span className="text-[#f64523]">talk.</span></h2>
+              <p className="text-gray-400 text-sm leading-relaxed mb-6">Tell us about your brand. We&apos;ll put together the perfect team and get back to you within 24 hours.</p>
+              <form id="contact-form" className="space-y-3" onSubmit={handleContactSubmit}>
+                <input id="fn" type="text" placeholder="Name" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
+                <input id="fe" type="email" placeholder="Email" required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
+                <input id="fphone" type="tel" placeholder="Phone Number (optional)" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm" />
+                <select id="ftype" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-gray-600 text-sm">
+                  <option value="">Project Type</option>
+                  <option value="brand">Brand Building</option>
+                  <option value="digital">Digital Marketing</option>
+                  <option value="social">Social Media</option>
+                  <option value="media_buying">Media Buying</option>
+                  <option value="pr">PR & Media</option>
+                  <option value="events">Events & Experiential</option>
+                  <option value="web">Website Design</option>
+                  <option value="content">Content & SEO</option>
+                  <option value="performance">Performance Ads</option>
+                  <option value="influencer">Influencer Marketing</option>
+                  <option value="film">Photography & Film</option>
+                  <option value="other">Other</option>
+                </select>
+                <select id="fbudget" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-gray-600 text-sm">
+                  <option value="">Budget</option>
+                  <option value="under_50k">Under ₹50,000</option>
+                  <option value="50k_2l">₹50,000 - ₹2,00,000</option>
+                  <option value="2l_5l">₹2,00,000 - ₹5,00,000</option>
+                  <option value="5l_plus">₹5,00,000+</option>
+                  <option value="discuss">Let&apos;s Discuss</option>
+                </select>
+                <textarea id="fm" placeholder="Message" rows={3} required className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 outline-none focus:border-orange-500 text-sm resize-none" />
+                <button type="submit" className="w-full btn-orange py-4 rounded-xl font-bold uppercase tracking-widest text-xs">Send Inquiry</button>
+              </form>
+              <div id="success-message" style={{display:'none'}} className="mt-4 py-6 text-center bg-orange-50 rounded-2xl italic font-bold text-[#f64523] text-sm">
+                Inquiry sent! We&apos;ll be in touch within 24 hours. ✦
+              </div>
+            </div>
+
+          </div>
+        </section>
