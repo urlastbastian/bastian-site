@@ -119,24 +119,28 @@ export default function Home() {
         .specialism-btn { cursor: pointer; transition: all 0.3s; }
         .specialism-btn:hover { border-color: #f58a07; color: #f58a07; background: #fff7ed; }
         .shortlist-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
-        .offering-card { border: 1px solid #e5e7eb; border-radius: 16px; padding: 28px; cursor: pointer; background: white; position: relative; overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+        .offering-card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; cursor: pointer; background: white; position: relative; overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
         .offering-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--bastian-orange); transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
-        .offering-card:hover { border-color: #e5e7eb; box-shadow: 0 8px 30px -8px rgba(0,0,0,0.12); }
+        .offering-card:hover { box-shadow: 0 8px 30px -8px rgba(0,0,0,0.12); }
         .offering-card:hover::before { width: 100%; }
         .offering-icon { color: var(--bastian-orange); transition: transform 0.3s ease; }
         .offering-card:hover .offering-icon { transform: scale(1.1); }
         .offering-desc { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease 0.1s; }
         .offering-card:hover .offering-desc { max-height: 80px; opacity: 1; }
-        .offering-title { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 18px; margin: 12px 0 0 0; transition: color 0.3s ease; }
+        .offering-title { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 15px; margin: 8px 0 0 0; }
         #brands-grid::-webkit-scrollbar { height: 1px; }
         #brands-grid::-webkit-scrollbar-track { background: #f3f4f6; border-radius: 99px; }
         #brands-grid::-webkit-scrollbar-thumb { background: #f58a07; border-radius: 99px; }
         #brands-progress { height: 1px; background: #f3f4f6; border-radius: 99px; margin-top: 12px; }
         #brands-thumb { height: 1px; background: #f58a07; border-radius: 99px; width: 0%; transition: width 0.1s; }
-        .deck-frame { background: #f8f8f8; border-radius: 24px; overflow: hidden; border: 1px solid #e5e7eb; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; }
-        .deck-nav-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid #e5e7eb; background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
-        .deck-nav-btn:hover { border-color: #f58a07; color: #f58a07; }
+        .deck-canvas-wrap { background: #1a1a1a; border-radius: 16px; overflow: hidden; position: relative; }
+        #deck-canvas { display: block; width: 100%; height: auto; }
+        .deck-nav-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid #e5e7eb; background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
+        .deck-nav-btn:hover:not(:disabled) { border-color: #f58a07; color: #f58a07; }
         .deck-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        .offerings-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #f58a07 #f3f4f6; }
+        .offerings-scroll::-webkit-scrollbar { width: 2px; }
+        .offerings-scroll::-webkit-scrollbar-thumb { background: #f58a07; border-radius: 99px; }
       `}</style>
 
       {/* FREELANCER PROFILE MODAL */}
@@ -183,7 +187,6 @@ export default function Home() {
           <div className="hidden lg:flex space-x-10 uppercase text-[10px] font-bold tracking-[0.2em] text-gray-400">
             <a href="#about" className="nav-link hover:text-black transition-colors">About</a>
             <a href="#network" className="nav-link hover:text-black transition-colors">Network</a>
-            <a href="#offerings" className="nav-link hover:text-black transition-colors">Offerings</a>
             <a href="#work" className="nav-link hover:text-black transition-colors">Work</a>
             <a href="#audit" className="nav-link hover:text-black transition-colors">Brand Audit</a>
             <a href="#join" className="nav-link hover:text-black transition-colors">Join</a>
@@ -199,7 +202,7 @@ export default function Home() {
           </div>
         </div>
         <div id="mobile-menu" className="mobile-menu flex-col pt-6 pb-4 space-y-4 lg:hidden">
-          {["about","network","offerings","work","audit","join","contact"].map(item => (
+          {["about","network","work","audit","join","contact"].map(item => (
             <a key={item} href={`#${item}`} className="uppercase text-[11px] font-bold tracking-widest text-gray-500 hover:text-orange-500"
               onClick={() => document.getElementById('mobile-menu')?.classList.remove('open')}>
               {item}
@@ -334,74 +337,63 @@ export default function Home() {
           </div>
         </section>
 
-        {/* OFFERINGS */}
-        <section id="offerings" className="py-24 px-6 md:px-12 border-b border-gray-100 scroll-mt-20">
-          <div className="max-w-7xl mx-auto">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">What We Deliver</p>
-            <h2 className="serif text-6xl font-bold mb-16 tracking-tight">Our <em className="text-[#f58a07]">Offerings</em></h2>
-            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-3">
-              {offerings.map((o) => (
-                <div key={o.title} className="offering-card">
-                  <span className="offering-icon w-7 h-7 block">{o.svg}</span>
-                  <p className="offering-title">{o.title}</p>
-                  <div className="offering-desc">
-                    <p className="text-xs text-gray-400 leading-relaxed mt-3">{o.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* THE DECK */}
+        {/* WORK + OFFERINGS — combined section */}
         <section id="work" className="py-24 px-6 md:px-12 border-b border-gray-100 scroll-mt-20">
           <div className="max-w-7xl mx-auto">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Portfolio</p>
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+
+              {/* LEFT — The Deck */}
               <div>
-                <h2 className="serif text-6xl font-bold tracking-tight">The <em className="text-[#f58a07]">Deck</em></h2>
-                <p className="text-gray-400 mt-3 text-lg">From brand strategy to activations — a look at who we are and what we&apos;ve built.</p>
-              </div>
-              <a href={DECK_URL} download className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors flex-shrink-0">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                Download Deck
-              </a>
-            </div>
-
-            {/* PDF Viewer */}
-            <div className="deck-frame mb-6">
-              <iframe
-                id="deck-iframe"
-                src={`${DECK_URL}#page=1&toolbar=0&navpanes=0&scrollbar=0&view=Fit`}
-                className="w-full h-full border-0"
-                title="Bastian Deck"
-              />
-            </div>
-
-            {/* Controls */}
-            <div className="flex items-center justify-between gap-4">
-              <button
-                id="deck-prev"
-                className="deck-nav-btn"
-                onClick={() => (window as any).deckNav(-1)}
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
-              </button>
-
-              <div className="flex items-center gap-4 flex-1 justify-center">
-                <div className="flex-1 max-w-xs bg-gray-100 rounded-full h-1">
-                  <div id="deck-progress" className="bg-[#f58a07] h-1 rounded-full transition-all duration-300" style={{width:`${(1/TOTAL_PAGES)*100}%`}}></div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">Portfolio</p>
+                <div className="flex items-end justify-between mb-6">
+                  <h2 className="serif text-5xl font-bold tracking-tight">The <em className="text-[#f58a07]">Deck</em></h2>
+                  <a href={DECK_URL} download className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors">
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Download
+                  </a>
                 </div>
-                <span id="deck-counter" className="text-xs font-bold text-gray-400 uppercase tracking-widest flex-shrink-0">1 / {TOTAL_PAGES}</span>
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed">From brand strategy to activations — a look at who we are and what we&apos;ve built.</p>
+
+                {/* Canvas-based PDF viewer */}
+                <div className="deck-canvas-wrap mb-4">
+                  <canvas id="deck-canvas"></canvas>
+                  <div id="deck-loading" style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',background:'#1a1a1a'}}>
+                    <div className="loader"></div>
+                  </div>
+                </div>
+
+                {/* Controls */}
+                <div className="flex items-center gap-3">
+                  <button id="deck-prev" className="deck-nav-btn" disabled>
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                  </button>
+                  <div className="flex-1 bg-gray-100 rounded-full h-0.5">
+                    <div id="deck-progress" className="bg-[#f58a07] h-0.5 rounded-full transition-all duration-300" style={{width:'4.16%'}}></div>
+                  </div>
+                  <span id="deck-counter" className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex-shrink-0">1 / {TOTAL_PAGES}</span>
+                  <button id="deck-next" className="deck-nav-btn">
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
+                  </button>
+                </div>
               </div>
 
-              <button
-                id="deck-next"
-                className="deck-nav-btn"
-                onClick={() => (window as any).deckNav(1)}
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
-              </button>
+              {/* RIGHT — Offerings scrollable */}
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">What We Deliver</p>
+                <h2 className="serif text-5xl font-bold tracking-tight mb-6">Our <em className="text-[#f58a07]">Offerings</em></h2>
+                <div className="offerings-scroll grid grid-cols-2 gap-2" style={{maxHeight:'420px'}}>
+                  {offerings.map((o) => (
+                    <div key={o.title} className="offering-card">
+                      <span className="offering-icon w-5 h-5 block">{o.svg}</span>
+                      <p className="offering-title">{o.title}</p>
+                      <div className="offering-desc">
+                        <p className="text-xs text-gray-400 leading-relaxed mt-2">{o.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
@@ -541,7 +533,7 @@ export default function Home() {
             <div>
               <p className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-4">Navigation</p>
               <div className="space-y-3">
-                {["About","Network","Offerings","Work","Brand Audit","Join","Contact"].map(item => (
+                {["About","Network","Work","Brand Audit","Join","Contact"].map(item => (
                   <a key={item} href={`#${item.toLowerCase().replace(' ','-')}`} className="block text-sm text-gray-400 hover:text-orange-500 transition-colors">{item}</a>
                 ))}
               </div>
@@ -561,25 +553,63 @@ export default function Home() {
         </div>
       </footer>
 
-      <script src="/bastian.js" defer></script>
+      {/* PDF.js via CDN */}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
       <script dangerouslySetInnerHTML={{ __html: `
         var deckPage = 1;
         var deckTotal = ${TOTAL_PAGES};
-        var deckUrl = "${DECK_URL}";
+        var deckPdf = null;
+
+        function deckRender(num) {
+          if (!deckPdf) return;
+          deckPdf.getPage(num).then(function(page) {
+            var canvas = document.getElementById('deck-canvas');
+            var wrap = canvas.parentElement;
+            var viewport = page.getViewport({ scale: 1 });
+            var scale = wrap.clientWidth / viewport.width;
+            var scaled = page.getViewport({ scale: scale });
+            canvas.width = scaled.width;
+            canvas.height = scaled.height;
+            var ctx = canvas.getContext('2d');
+            page.render({ canvasContext: ctx, viewport: scaled }).promise.then(function() {
+              var loading = document.getElementById('deck-loading');
+              if (loading) loading.style.display = 'none';
+            });
+            var counter = document.getElementById('deck-counter');
+            if (counter) counter.textContent = num + ' / ' + deckTotal;
+            var progress = document.getElementById('deck-progress');
+            if (progress) progress.style.width = ((num / deckTotal) * 100) + '%';
+            var prev = document.getElementById('deck-prev');
+            var next = document.getElementById('deck-next');
+            if (prev) prev.disabled = num === 1;
+            if (next) next.disabled = num === deckTotal;
+          });
+        }
+
         window.deckNav = function(dir) {
           deckPage = Math.min(Math.max(deckPage + dir, 1), deckTotal);
-          var iframe = document.getElementById('deck-iframe');
-          if (iframe) iframe.src = deckUrl + '#page=' + deckPage + '&toolbar=0&navpanes=0&scrollbar=0&view=Fit';
-          var counter = document.getElementById('deck-counter');
-          if (counter) counter.textContent = deckPage + ' / ' + deckTotal;
-          var progress = document.getElementById('deck-progress');
-          if (progress) progress.style.width = ((deckPage / deckTotal) * 100) + '%';
+          deckRender(deckPage);
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+          var pdfjsLib = window['pdfjs-dist/build/pdf'];
+          if (!pdfjsLib) { console.log('PDF.js not loaded'); return; }
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          pdfjsLib.getDocument('${DECK_URL}').promise.then(function(pdf) {
+            deckPdf = pdf;
+            deckRender(1);
+          }).catch(function(err) {
+            console.error('PDF load error:', err);
+          });
+
           var prev = document.getElementById('deck-prev');
           var next = document.getElementById('deck-next');
-          if (prev) prev.disabled = deckPage === 1;
-          if (next) next.disabled = deckPage === deckTotal;
-        };
+          if (prev) prev.addEventListener('click', function() { window.deckNav(-1); });
+          if (next) next.addEventListener('click', function() { window.deckNav(1); });
+        });
       `}} />
+
+      <script src="/bastian.js" defer></script>
     </>
   );
 }
